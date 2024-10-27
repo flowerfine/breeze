@@ -334,6 +334,7 @@ export default {
   'pages.project.di.step.email.emailTransportProtocol': '邮件传输协议',
   'pages.project.di.step.email.emailFromAddress': '邮件发送者地址',
   'pages.project.di.step.email.emailSmtpAuth': '启用SMTP认证',
+  'pages.project.di.step.email.emailSmtpPort': 'SMTP端口号',
   'pages.project.di.step.email.emailAuthorizationCode': 'SMTP认证代码',
   'pages.project.di.step.email.emailToAddress': '邮件接收者地址',
   'pages.project.di.step.email.emailMessageHeadline': '邮件标题',
@@ -611,6 +612,8 @@ export default {
   'pages.project.di.step.elasticsearch.scrollSize': '滚动大小',
   'pages.project.di.step.elasticsearch.source': '字段列表',
   'pages.project.di.step.elasticsearch.source.tooltip': '字段列表',
+  'pages.project.di.step.elasticsearch.arrayColumn': '数组字段',
+  'pages.project.di.step.elasticsearch.arrayColumn.placeholder': '{tags = "array<string>",phones = "array<string>"}',
 
   // neo4j
   'pages.project.di.step.neo4j.uri': 'URI',
@@ -679,7 +682,7 @@ export default {
   'pages.project.di.step.doris.sinkMaxRetries': '重试次数',
   'pages.project.di.step.doris.sinkBufferSize': 'Buffer 大小',
   'pages.project.di.step.doris.sinkBufferCount': 'Buffer 数量',
-  'pages.project.di.step.doris.dorisBatchSize': '批量写入数量',
+  'pages.project.di.step.doris.dorisBatchSize': '批量读取或写入数量',
   'pages.project.di.step.doris.needsUnsupportedTypeCasting': '启用类型转换',
   'pages.project.di.step.doris.needsUnsupportedTypeCasting.tooltip': '上游数据类型和 Doris 数据类型不匹配时，将上游数据转换成 Doris 支持的数据类型。如 Decimal64 转换成 Double',
   'pages.project.di.step.doris.saveModeCreateTemplate': 'Schema 创建模板',
@@ -793,8 +796,6 @@ export default {
   'pages.project.di.step.cdc.password': '密码',
   'pages.project.di.step.cdc.databases': '数据库',
   'pages.project.di.step.cdc.databases.placeholder': 'db1, db2',
-  'pages.project.di.step.cdc.schemas': 'Schema',
-  'pages.project.di.step.cdc.schemas.placeholder': 'DEBEZIUM1, DEBEZIUM2',
   'pages.project.di.step.cdc.tables': '表',
   'pages.project.di.step.cdc.tables.placeholder': 'table1, table2',
   'pages.project.di.step.cdc.tableConfig': '表配置',
@@ -831,6 +832,12 @@ export default {
   'pages.project.di.step.cdc.debeziums.value': '值',
   'pages.project.di.step.cdc.debeziums.value.placeholder': 'never',
   'pages.project.di.step.cdc.format': 'CDC 格式',
+
+  // oracle-cdc
+  'pages.project.di.step.oracle-cdc.schemaNames': 'Schema',
+  'pages.project.di.step.oracle-cdc.schemaNames.placeholder': 'DEBEZIUM1, DEBEZIUM2',
+  'pages.project.di.step.oracle-cdc.useSelectCount': '使用 select count()',
+  'pages.project.di.step.oracle-cdc.skipAnalyze': '跳过表 analysis',
 
   // mongodb-cdc
   'pages.project.di.step.mongodb-cdc.hosts': '服务器地址',

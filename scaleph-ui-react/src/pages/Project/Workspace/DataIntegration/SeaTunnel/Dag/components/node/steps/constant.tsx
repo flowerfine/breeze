@@ -246,6 +246,7 @@ export const EmailParams = {
   emailTransportProtocol: 'email_transport_protocol',
   emailFromAddress: 'email_from_address',
   emailSmtpAuth: 'email_smtp_auth',
+  emailSmtpPort: 'email_smtp_port',
   emailAuthorizationCode: 'email_authorization_code',
   emailToAddress: 'email_to_address',
   emailMessageHeadline: 'email_message_headline',
@@ -500,6 +501,7 @@ export const ElasticsearchParams = {
   scrollTime: "scroll_time",
   scrollSize: "scroll_size",
   source: "source",
+  arrayColumn: "array_column",
   schema: "schema"
 };
 
@@ -700,6 +702,12 @@ export const CDCParams = {
   debeziumProperty: 'debeziumProperty',
   debeziumValue: 'debeziumValue',
   format: 'format',
+};
+
+export const OracleCDCParams = {
+  schemaNames: 'schema-names',
+  useSelectCount: 'use_select_count',
+  skipAnalyze: 'skip_analyze',
 };
 
 export const MongoDBCDCParams = {
