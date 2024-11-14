@@ -669,3 +669,28 @@ export type DorisClusterFeEndpoint = {
   query?: string;
   editLog?: string;
 };
+
+export type ScheduleGroup = {
+  id?: number;
+  namespace: string;
+  name: string;
+  remark?: string;
+  createTime?: Date;
+  updateTime?: Date;
+};
+
+export type ScheduleGroupParam = QueryParam & {
+  namespace: string;
+  name?: string;
+};
+
+export type ScheduleGroupAddParam = {
+  namespace: number;
+  name: string;
+  remark?: string;
+};
+
+export type ScheduleGroupUpdateParam = {
+  id: number;
+  remark?: string;
+};
