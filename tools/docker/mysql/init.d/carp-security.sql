@@ -196,7 +196,15 @@ VALUES (12000002, '2', 12000000, 'flink-sql', 'Flink SQL', '/workspace/data-deve
         'sys');
 INSERT INTO `carp_sec_resource_web` (`id`, `type`, `pid`, `value`, `label`, `path`, `order`, `status`, `remark`,
                                      `creator`, `editor`)
-VALUES (13000000, '1', 10000000, 'project.dag-scheduler', 'DAG 调度', '/workspace/dag-scheduler', 3, '1', NULL, 'sys',
+VALUES (13000000, '1', 10000000, 'project.schedule', '调度', '/workspace/schedule', 3, '1', NULL, 'sys',
+        'sys');
+INSERT INTO `carp_sec_resource_web` (`id`, `type`, `pid`, `value`, `label`, `path`, `order`, `status`, `remark`,
+                                     `creator`, `editor`)
+VALUES (13000001, '2', 13000000, 'project.schedule.group', '分组管理', '/workspace/schedule/group', 1, '1', NULL, 'sys',
+        'sys');
+INSERT INTO `carp_sec_resource_web` (`id`, `type`, `pid`, `value`, `label`, `path`, `order`, `status`, `remark`,
+                                     `creator`, `editor`)
+VALUES (13000002, '2', 13000000, 'project.schedule.job', '任务管理', '/workspace/schedule/job', 2, '1', NULL, 'sys',
         'sys');
 INSERT INTO `carp_sec_resource_web` (`id`, `type`, `pid`, `value`, `label`, `path`, `order`, `status`, `remark`,
                                      `creator`, `editor`)

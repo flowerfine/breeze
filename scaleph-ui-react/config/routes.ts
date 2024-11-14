@@ -258,9 +258,21 @@ export default [
         ]
       },
       {
-        name: 'project.dag-scheduler',
-        path: '/workspace/dag-scheduler',
+        name: 'project.schedule',
+        path: '/workspace/schedule',
         icon: 'schedule',
+        routes: [
+          {
+            name: 'group',
+            path: '/workspace/schedule/group',
+            component: './Project/Workspace/Schedule/Group',
+          },
+          {
+            name: 'job',
+            path: '/workspace/schedule/job',
+            component: './Project/Workspace/Schedule/Job',
+          },
+        ]
       },
       {
         name: 'project.data-service',
