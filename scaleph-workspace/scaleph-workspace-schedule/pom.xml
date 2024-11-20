@@ -31,7 +31,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.sliew</groupId>
-            <artifactId>carp-module-scheduler-base</artifactId>
+            <artifactId>carp-module-scheduler-manage</artifactId>
         </dependency>
     </dependencies>
 </project>
