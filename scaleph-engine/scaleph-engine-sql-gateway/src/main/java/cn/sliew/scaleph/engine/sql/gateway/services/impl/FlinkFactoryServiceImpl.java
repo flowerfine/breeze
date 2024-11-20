@@ -20,7 +20,7 @@
 package cn.sliew.scaleph.engine.sql.gateway.services.impl;
 
 import cn.sliew.scaleph.common.nio.FileUtil;
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.engine.sql.gateway.services.FlinkFactoryService;
 import cn.sliew.scaleph.resource.service.JarService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,7 @@ public class FlinkFactoryServiceImpl implements FlinkFactoryService {
     private <T extends Factory> List<T> findFactories(Long id, Class<T> tClass) {
         Path randomWorkspace = null;
         try {
-            randomWorkspace = SystemUtil.getRandomWorkspace();
+            randomWorkspace = ScalephSystemUtil.getRandomWorkspace();
             String randomFileName = RandomStringUtils.random(8, 'A', 'z', true, false);
             Path randomFilePath = Paths.get(randomFileName, randomFileName + ".jar");
             OutputStream outputStream = Files.newOutputStream(randomFilePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);

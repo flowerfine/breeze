@@ -21,7 +21,7 @@ package cn.sliew.scaleph.meta.service.impl;
 import cn.sliew.scaleph.common.codec.CodecUtil;
 import cn.sliew.scaleph.common.exception.Rethrower;
 import cn.sliew.scaleph.common.util.PropertyUtil;
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.common.util.TemporaryClassLoaderContext;
 import cn.sliew.scaleph.dao.entity.master.meta.MetaDatasource;
 import cn.sliew.scaleph.dao.mapper.master.meta.MetaDatasourceMapper;
@@ -58,7 +58,7 @@ public class MetaDatasourceServiceImpl implements MetaDatasourceService, Initial
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Path datasourcePluginPath = SystemUtil.getDatasourcePluginDir();
+        Path datasourcePluginPath = ScalephSystemUtil.getDatasourcePluginDir();
         this.datasourceManager = new DatasourceManager(datasourcePluginPath);
     }
 

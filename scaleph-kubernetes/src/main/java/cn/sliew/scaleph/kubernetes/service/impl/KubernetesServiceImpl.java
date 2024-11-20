@@ -20,7 +20,7 @@ package cn.sliew.scaleph.kubernetes.service.impl;
 
 import cn.sliew.milky.common.exception.Rethrower;
 import cn.sliew.scaleph.common.nio.FileUtil;
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.kubernetes.service.KubernetesService;
 import cn.sliew.scaleph.resource.service.ClusterCredentialService;
 import cn.sliew.scaleph.resource.service.dto.ClusterCredentialDTO;
@@ -92,7 +92,7 @@ public class KubernetesServiceImpl implements KubernetesService {
     @Override
     public Path downloadConfig(ClusterCredentialDTO clusterCredential) throws IOException {
         Long clusterCredentialId = clusterCredential.getId();
-        Path kubeConfigPath = SystemUtil.getKubeConfigPath();
+        Path kubeConfigPath = ScalephSystemUtil.getKubeConfigPath();
         Path kubeConfig = FileUtil.createFile(kubeConfigPath, clusterCredentialId.toString());
         try (OutputStream outputStream = FileUtil.getOutputStream(kubeConfig)) {
             clusterCredentialService.download(clusterCredentialId, outputStream);

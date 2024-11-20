@@ -1205,6 +1205,7 @@ export default {
   'pages.project.dataservice.config.steps.config.sql.query': '语句',
   'pages.project.dataservice.config.detail': '配置详情',
 
+  'pages.project.schedule.group': '分组',
   'pages.project.schedule.group.name': '名称',
 
   'Run': '运行',

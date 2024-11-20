@@ -24,7 +24,7 @@ import cn.sliew.scaleph.common.exception.Rethrower;
 import cn.sliew.scaleph.common.nio.FileUtil;
 import cn.sliew.scaleph.common.nio.TarUtil;
 import cn.sliew.scaleph.common.util.SeaTunnelReleaseUtil;
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.dao.entity.master.resource.ResourceSeaTunnelRelease;
 import cn.sliew.scaleph.dao.mapper.master.resource.ResourceSeaTunnelReleaseMapper;
 import cn.sliew.scaleph.resource.service.SeaTunnelReleaseService;
@@ -175,7 +175,7 @@ public class SeaTunnelReleaseServiceImpl implements SeaTunnelReleaseService {
 
     public void doFetchConnectors(Long id) throws IOException {
         SeaTunnelReleaseDTO dto = selectOne(id);
-        Path workspace = SystemUtil.getRandomWorkspace();
+        Path workspace = ScalephSystemUtil.getRandomWorkspace();
         try {
             Path file = FileUtil.createFile(workspace, dto.getFileName());
             try (OutputStream outputStream = FileUtil.getOutputStream(file)) {

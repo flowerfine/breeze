@@ -6,15 +6,15 @@ export const WsScheduleGroupService = {
   url: '/api/carp/schedule/group',
 
   list: async (queryParam: ScheduleGroupParam) => {
-    return request<PageResponse<ScheduleGroup>>(`${WsScheduleGroupService.url}/page`, {
+    return request<ResponseBody<PageResponse<ScheduleGroup>>>(`${WsScheduleGroupService.url}/page`, {
       method: 'GET',
       params: queryParam,
     }).then((res) => {
       const result = {
-        data: res.records,
-        total: res.total,
-        pageSize: res.size,
-        current: res.current,
+        data: res.data?.records,
+        total: res.data?.total,
+        pageSize: res.data?.size,
+        current: res.data?.current,
       };
       return result;
     });

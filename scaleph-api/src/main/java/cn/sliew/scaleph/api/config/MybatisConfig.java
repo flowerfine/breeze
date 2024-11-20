@@ -34,13 +34,6 @@ import org.springframework.util.StringUtils;
 //@Configuration
 public class MybatisConfig {
 
-    @Bean
-    public MybatisPlusInterceptor paginationInterceptor() {
-        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
-        return interceptor;
-    }
-
     /**
      * replace InsertUpdateAspect, which already deleted
      */

@@ -30,7 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Component
-public class SystemUtil implements InitializingBean, DisposableBean {
+public class ScalephSystemUtil implements InitializingBean, DisposableBean {
 
     private static final String LOCAL_FS_STORAGE_DIR_NAME = "storage";
     private static String workspace;
@@ -39,12 +39,12 @@ public class SystemUtil implements InitializingBean, DisposableBean {
 
     @Value("${app.workspace}")
     public void setWorkspace(String workspace) {
-        SystemUtil.workspace = workspace;
+        ScalephSystemUtil.workspace = workspace;
     }
 
     @Value("${app.plugin.datasource.dir}")
     public void setDatasourcePluginDir(String datasourcePluginDir) {
-        SystemUtil.datasourcePluginDir = datasourcePluginDir;
+        ScalephSystemUtil.datasourcePluginDir = datasourcePluginDir;
     }
 
     @Override

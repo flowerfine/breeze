@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.storage.configuration;
 
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.config.storage.*;
 import cn.sliew.scaleph.storage.util.HadoopUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ import java.net.URISyntaxException;
 public class FileSystemConfiguration {
 
     @Autowired
-    private SystemUtil systemUtil;
+    private ScalephSystemUtil systemUtil;
 
     @Bean
     @ConditionalOnProperty(value = "file-system.type", havingValue = "local")

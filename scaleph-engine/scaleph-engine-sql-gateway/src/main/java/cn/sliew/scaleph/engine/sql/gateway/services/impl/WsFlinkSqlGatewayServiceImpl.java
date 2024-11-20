@@ -43,7 +43,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import cn.sliew.scaleph.common.util.SystemUtil;
+import cn.sliew.scaleph.common.util.ScalephSystemUtil;
 import cn.sliew.scaleph.engine.sql.gateway.exception.ScalephSqlGatewayNotFoundException;
 import cn.sliew.scaleph.engine.sql.gateway.internal.ScalephCatalogManager;
 import cn.sliew.scaleph.engine.sql.gateway.services.WsFlinkSqlGatewayService;
@@ -219,7 +219,7 @@ public class WsFlinkSqlGatewayServiceImpl implements WsFlinkSqlGatewayService {
                     .map(jarId -> {
                         JarDTO jarDTO = jarService.getRaw(jarId);
                         try {
-                            Path localPath = SystemUtil.getLocalStorageDir().resolve("jars");
+                            Path localPath = ScalephSystemUtil.getLocalStorageDir().resolve("jars");
                             if (Files.notExists(localPath)) {
                                 Files.createDirectories(localPath);
                             }
