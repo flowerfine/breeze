@@ -2,9 +2,8 @@ import {useIntl} from '@umijs/max';
 import {useRef} from 'react';
 import {Col, Row} from 'antd';
 import {ActionType, PageContainer, ProColumns, ProFormInstance, ProTable} from '@ant-design/pro-components';
-import {DictDataService} from '@/services/admin/dictData.service';
-import {DictTypeService} from '@/services/admin/dictType.service';
-import {SysDictData, SysDictType} from '@/services/admin/typings';
+import {SysDictDefinition, SysDictInstance} from '@/services/admin/typings';
+import {SysDictService} from "@/services/admin/system/sysDict.service";
 
 const Dict: React.FC = () => {
   const intl = useIntl();
@@ -13,7 +12,7 @@ const Dict: React.FC = () => {
   const dictTypeFormRef = useRef<ProFormInstance>();
   const dictDataFormRef = useRef<ProFormInstance>();
 
-  const dictTypeTableColumns: ProColumns<SysDictType>[] = [
+  const dictTypeTableColumns: ProColumns<SysDictDefinition>[] = [
     {
       title: intl.formatMessage({id: 'pages.admin.dict.code'}),
       dataIndex: 'code',
@@ -34,15 +33,16 @@ const Dict: React.FC = () => {
     }
   ];
 
-  const dictDataTableColumns: ProColumns<SysDictData>[] = [
+  const dictDataTableColumns: ProColumns<SysDictInstance>[] = [
     {
       title: intl.formatMessage({id: 'pages.admin.dict.dictType'}),
-      dataIndex: 'dictType',
+      dataIndex: 'dictDefinitionCode',
       width: 240,
       fixed: 'left',
-      render: (_, record) => {
-        return <span>{record.dictType?.code + '-' + record.dictType?.name}</span>;
-      },
+      // render: (_, record) => {
+      //   return <span>{record.dictType?.code + '-' + record.dictType?.name}</span>;
+      // },
+      hideInTable: true
     },
     {
       title: intl.formatMessage({id: 'pages.admin.dict.value'}),
@@ -66,7 +66,7 @@ const Dict: React.FC = () => {
     <PageContainer title={false}>
       <Row gutter={[12, 12]}>
         <Col span={8}>
-          <ProTable<SysDictType>
+          <ProTable<SysDictDefinition>
             headerTitle={intl.formatMessage({id: 'pages.admin.dict.dictType'})}
             search={{filterType: 'light'}}
             rowKey="code"
@@ -75,14 +75,14 @@ const Dict: React.FC = () => {
             options={false}
             columns={dictTypeTableColumns}
             request={(params, sorter, filter) => {
-              return DictTypeService.listDictTypeByPage(params);
+              return SysDictService.listDefinition(params);
             }}
             pagination={{showQuickJumper: true, showSizeChanger: true, defaultPageSize: 10}}
             onRow={(record) => {
               return {
                 onClick: (event) => {
                   dictDataFormRef.current?.setFieldsValue({
-                    dictType: record.code,
+                    dictDefinitionCode: record.code,
                   });
                   dictDataFormRef.current?.submit();
                 },
@@ -93,7 +93,7 @@ const Dict: React.FC = () => {
           />
         </Col>
         <Col span={16}>
-          <ProTable<SysDictData>
+          <ProTable<SysDictInstance>
             headerTitle={intl.formatMessage({id: 'pages.admin.dict.dictData'})}
             search={{filterType: 'light'}}
             rowKey="key"
@@ -102,7 +102,7 @@ const Dict: React.FC = () => {
             options={false}
             columns={dictDataTableColumns}
             request={(params, sorter, filter) => {
-              return DictDataService.listDictDataByPage(params);
+              return SysDictService.listInstance(params);
             }}
             pagination={{showQuickJumper: true, showSizeChanger: true, defaultPageSize: 10}}
             tableAlertRender={false}

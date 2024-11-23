@@ -694,3 +694,43 @@ export type ScheduleGroupUpdateParam = {
   id: number;
   remark?: string;
 };
+
+export type ScheduleJob = {
+  id?: number;
+  jobGroup?: ScheduleJob;
+  type?: Dict;
+  engineType?: Dict;
+  jobType?: Dict;
+  name: string;
+  handler: string;
+  remark?: string;
+  createTime?: Date;
+  updateTime?: Date;
+};
+
+export type ScheduleJobParam = QueryParam & {
+  jobGroupId: number;
+  type?: string;
+  engineType?: string;
+  jobType?: string;
+  jobType?: string;
+  name?: string;
+  handler?: string;
+};
+
+export type ScheduleJobAddParam = {
+  jobGroupId?: number;
+  type: string;
+  engineType: string;
+  jobType: string;
+  name: string;
+  handler: string;
+  remark?: string;
+};
+
+export type ScheduleJobUpdateParam = {
+  id: number;
+  name: string;
+  handler: string;
+  remark?: string;
+};

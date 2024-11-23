@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {Button, message, Modal, Space, Tooltip} from "antd";
+import {Button, message, Modal, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {ActionType, PageContainer, ProColumns, ProFormInstance, ProTable} from "@ant-design/pro-components";
 import {useAccess, useIntl} from "@umijs/max";
@@ -107,6 +107,7 @@ const ScheduleGroupWeb: React.FC = () => {
             formRef={formRef}
             options={false}
             columns={tableColumns}
+            scroll={{ y: 55 * 5 }}
             request={(params, sorter, filter) =>
                 WsScheduleGroupService.list({...params, namespace: projectId})
             }
@@ -154,6 +155,7 @@ const ScheduleGroupWeb: React.FC = () => {
             }}
             pagination={{showQuickJumper: true, showSizeChanger: true, defaultPageSize: 10}}
             rowSelection={{
+                selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE],
                 fixed: true,
                 onChange(selectedRowKeys, selectedRows, info) {
                     setSelectedRows(selectedRows);

@@ -1207,6 +1207,8 @@ export default {
 
   'pages.project.schedule.group': '分组',
   'pages.project.schedule.group.name': '名称',
+  'pages.project.schedule.job': '任务',
+  'pages.project.schedule.job.name': '名称',
 
   'Run': '运行',
   'Save': '保存',

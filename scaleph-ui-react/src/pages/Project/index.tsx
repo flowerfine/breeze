@@ -158,7 +158,7 @@ const Project: React.FC = () => {
         rowKey="id"
         actionRef={actionRef}
         formRef={formRef}
-        options={{reload: true, setting: false, density: false}}
+        options={{reload: true, setting: true, density: true}}
         columns={tableColumns}
         request={(params, sorter, filter) => {
           return WsProjectService.listProjectByPage({...params, ...queryParams});
