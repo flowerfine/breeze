@@ -1,12 +1,11 @@
 import React, {useRef} from "react";
 import {ProCard, ProFormInstance, StepsForm} from "@ant-design/pro-components";
-import {connect, useIntl} from "@umijs/max";
+import {connect, useIntl, history} from "@umijs/max";
 import {WORKSPACE_CONF} from "@/constants/constant";
 import {DataserviceConfig, DataserviceConfigSaveParam} from "@/services/dataservice/typings";
 import DataserviceConfigBaseStep from "@/pages/Project/Workspace/DataService/Config/Steps/BaseStepForm";
 import DataserviceConfigConfigStep from "@/pages/Project/Workspace/DataService/Config/Steps/ConfigStepForm";
 import {DataserviceConfigService} from "@/services/dataservice/DataserviceConfigService";
-import {history} from "@@/core/history";
 
 const DataserviceConfigSteps: React.FC = (props: any) => {
   const intl = useIntl();

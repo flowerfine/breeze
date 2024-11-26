@@ -19,7 +19,6 @@
 package cn.sliew.scaleph.common.dict;
 
 import cn.sliew.carp.framework.common.dict.DictDefinition;
-import cn.sliew.carp.framework.common.dict.EnumDictRegistry;
 import cn.sliew.scaleph.common.dict.catalog.CatalogColumnType;
 import cn.sliew.scaleph.common.dict.catalog.CatalogConstraintType;
 import cn.sliew.scaleph.common.dict.catalog.CatalogFunctionLanguage;
@@ -40,10 +39,8 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.commons.lang3.EnumUtils;
 
 import java.util.Arrays;
-import java.util.List;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum DictType implements DictDefinition {
@@ -136,14 +133,6 @@ public enum DictType implements DictDefinition {
         return Arrays.stream(values())
                 .filter(type -> type.getCode().equals(code))
                 .findAny().orElseThrow(() -> new EnumConstantNotPresentException(DictType.class, code));
-    }
-
-    static {
-        List<DictType> enumList = EnumUtils.getEnumList(DictType.class);
-        for (DictType dictType : enumList) {
-            List values = EnumUtils.getEnumList(dictType.getInstanceClass());
-            EnumDictRegistry.register(dictType, values);
-        }
     }
 
     @EnumValue

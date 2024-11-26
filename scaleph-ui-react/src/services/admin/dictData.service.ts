@@ -1,13 +1,9 @@
-import {Dict, PageResponse} from '@/typings';
-import {request} from '@umijs/max';
-import {SysDictData, SysDictDataParam} from './typings';
+import {SysDictService} from "@/services/admin/system/sysDict.service";
 
 export const DictDataService = {
-  url: '/api/admin/dict/data',
+    url: '/api/admin/dict/data',
 
-  listDictDataByType2: async (dictTypeCode: string) => {
-    return request<Dict[]>(`${DictDataService.url}/v2/` + dictTypeCode, {
-      method: 'GET',
-    });
-  },
+    listDictDataByType2: async (dictTypeCode: string) => {
+        return SysDictService.listDictByDefinition(dictTypeCode)
+    },
 };

@@ -49,7 +49,6 @@ const DataIntegrationSeaTunnelForm: React.FC<ModalFormProps<WsArtifactSeaTunnel>
           name: values.name,
           remark: values.remark,
         };
-        console.log('values',job, values)
         return job.id
           ? WsArtifactSeaTunnelService.update(job).then((response) => {
             if (response.success) {

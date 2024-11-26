@@ -1,16 +1,14 @@
-import React, {useRef, useState} from "react";
-import {Button, message, Modal, Space, Tag, Tooltip} from "antd";
+import React, {useEffect, useRef, useState} from "react";
+import {Button, message, Modal, Space, Tooltip} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {ActionType, PageContainer, ProColumns, ProFormInstance, ProTable} from "@ant-design/pro-components";
 import {useAccess, useIntl} from "@umijs/max";
 import {WORKSPACE_CONF} from "@/constants/constant";
 import {PRIVILEGE_CODE} from "@/constants/privilegeCode";
-import {ScheduleJob} from "@/services/project/typings";
-import ScheduleGroupForm from "@/pages/Project/Workspace/Schedule/Group/ScheduleGroupForm";
+import {ScheduleGroup, ScheduleJob} from "@/services/project/typings";
 import {WsScheduleJobService} from "@/services/project/WsScheduleJobService";
 import {WsScheduleGroupService} from "@/services/project/WsScheduleGroupService";
-import {SysDictService} from "@/services/admin/system/sysDict.service";
-import {DICT_TYPE} from "@/constants/dictType";
+import ScheduleJobForm from "@/pages/Project/Workspace/Schedule/Job/ScheduleJobForm";
 
 const ScheduleJobWeb: React.FC = () => {
     const intl = useIntl();
@@ -18,11 +16,19 @@ const ScheduleJobWeb: React.FC = () => {
     const actionRef = useRef<ActionType>();
     const formRef = useRef<ProFormInstance>();
     const [selectedRows, setSelectedRows] = useState<ScheduleJob[]>([]);
+    const [scheduleGroups, setScheduleGroups] = useState<Array<ScheduleGroup>>();
     const [scheduleJobFormData, setScheduleJobFormData] = useState<{
         visiable: boolean;
         data: ScheduleJob;
     }>({visiable: false, data: {}});
     const projectId = localStorage.getItem(WORKSPACE_CONF.projectId);
+
+    useEffect(() => {
+        if (scheduleGroups) {
+            formRef.current?.setFieldValue("jobGroupId", scheduleGroups[0].id)
+            formRef.current?.submit()
+        }
+    }, [scheduleGroups]);
 
     const tableColumns: ProColumns<ScheduleJob>[] = [
         {
@@ -31,6 +37,9 @@ const ScheduleJobWeb: React.FC = () => {
             hideInTable: true,
             request: (params, props) => {
                 return WsScheduleGroupService.list({namespace: projectId}).then((result) => {
+                    if (result.data) {
+                        setScheduleGroups(result.data)
+                    }
                     return result.data?.map((item) => {
                         return {
                             value: item.id,
@@ -125,9 +134,12 @@ const ScheduleJobWeb: React.FC = () => {
             formRef={formRef}
             options={false}
             columns={tableColumns}
-            request={(params, sorter, filter) =>
-                WsScheduleJobService.list({...params})
-            }
+            request={(params, sorter, filter) => {
+                if (params["jobGroupId"]) {
+                    return WsScheduleJobService.list({...params})
+                }
+                return Promise.reject()
+            }}
             toolbar={{
                 actions: [
                     access.canAccess(PRIVILEGE_CODE.datadevResourceAdd) && (
@@ -181,7 +193,7 @@ const ScheduleJobWeb: React.FC = () => {
             tableAlertOptionRender={false}
         />
         {scheduleJobFormData.visiable && (
-            <ScheduleGroupForm
+            <ScheduleJobForm
                 visible={scheduleJobFormData.visiable}
                 data={scheduleJobFormData.data}
                 onCancel={() => {

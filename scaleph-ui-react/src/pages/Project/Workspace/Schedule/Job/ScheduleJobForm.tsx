@@ -3,10 +3,14 @@ import {ModalForm, ProFormDigit, ProFormText, ProFormTextArea} from "@ant-design
 import {useIntl} from '@umijs/max';
 import {ModalFormProps} from '@/typings';
 import {WORKSPACE_CONF} from '@/constants/constant';
-import {ScheduleGroup} from '@/services/project/typings';
+import {ScheduleJob} from '@/services/project/typings';
 import {WsScheduleGroupService} from "@/services/project/WsScheduleGroupService";
 
-const ScheduleGroupForm: React.FC<ModalFormProps<ScheduleGroup>> = ({data, visible, onVisibleChange}) => {
+const ScheduleJobForm: React.FC<ModalFormProps<ScheduleJob>> = ({
+                                                                    data,
+                                                                    visible,
+                                                                    onVisibleChange
+                                                                }) => {
     const intl = useIntl();
     const [form] = Form.useForm();
     const projectId = localStorage.getItem(WORKSPACE_CONF.projectId);
@@ -14,11 +18,11 @@ const ScheduleGroupForm: React.FC<ModalFormProps<ScheduleGroup>> = ({data, visib
     return (
         <ModalForm
             title={
-                data?.id
+                data.id
                     ? intl.formatMessage({id: 'app.common.operate.edit.label'}) +
-                    intl.formatMessage({id: 'pages.project.schedule.group'})
+                    intl.formatMessage({id: 'pages.project.schedule.job'})
                     : intl.formatMessage({id: 'app.common.operate.new.label'}) +
-                    intl.formatMessage({id: 'pages.project.schedule.group'})
+                    intl.formatMessage({id: 'pages.project.schedule.job'})
             }
             form={form}
             initialValues={{
@@ -43,7 +47,6 @@ const ScheduleGroupForm: React.FC<ModalFormProps<ScheduleGroup>> = ({data, visib
                     name: values.name,
                     remark: values.remark
                 };
-                console.log('values', dataValue, param)
                 return values.id
                     ? WsScheduleGroupService.update(param).then((response) => {
                         if (response.success) {
@@ -78,4 +81,4 @@ const ScheduleGroupForm: React.FC<ModalFormProps<ScheduleGroup>> = ({data, visib
     );
 };
 
-export default ScheduleGroupForm;
+export default ScheduleJobForm;
