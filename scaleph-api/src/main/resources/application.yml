@@ -16,7 +16,7 @@
 #
 
 server:
-  port: 8080
+  port: 8868
   tomcat.uri-encoding: UTF-8
   servlet.context-path: /${spring.application.name}
 

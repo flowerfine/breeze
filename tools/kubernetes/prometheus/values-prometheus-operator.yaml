@@ -92,7 +92,7 @@ alertmanager:
       - name: 'webhook'
         webhook_configs:
           - send_resolved: false
-            url: http://10.10.18.163:8080/carp/api/carp/alert
+            url: http://10.10.18.163:8868/carp/api/carp/alert
 
   ## Configuration for Alertmanager service
   service:

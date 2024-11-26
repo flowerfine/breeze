@@ -17,7 +17,7 @@ CREATE TABLE `carp_schedule_job_group`
 ) ENGINE=InnoDB COMMENT='schedule job group';
 
 INSERT INTO `carp_schedule_job_group` (`id`, `namespace`, `name`, `remark`, `creator`, `editor`)
-VALUES (1, 'default', 'default', NULL, 'sys', 'sys');
+VALUES (1, '1', 'default', NULL, 'sys', 'sys');
 
 DROP TABLE IF EXISTS `carp_schedule_job_config`;
 CREATE TABLE `carp_schedule_job_config`

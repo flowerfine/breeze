@@ -33,7 +33,7 @@ public enum DockerUtils {
     /** Environment param keys */
     private static final String ENV_KEY_HOST = "JPAAS_HOST";
     private static final String ENV_KEY_PORT = "JPAAS_HTTP_PORT";
-    private static final String ENV_KEY_PORT_ORIGINAL = "JPAAS_HOST_PORT_8080";
+    private static final String ENV_KEY_PORT_ORIGINAL = "JPAAS_HOST_PORT_8868";
 
     /** Docker host & port */
     private static String DOCKER_HOST = "";

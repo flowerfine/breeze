@@ -9,4 +9,4 @@ CMD envsubst '$$SCALEPH_API_URL' < /nginx.conf.template > /etc/nginx/nginx.conf 
 	&& cat /etc/nginx/nginx.conf \
 	&& nginx -g 'daemon off;'
 
-EXPOSE 8096 8096
+EXPOSE 8888 8888

@@ -22,6 +22,6 @@ RUN mkdir -p $SCALEPH_HOME
 
 WORKDIR $SCALEPH_HOME
 
-EXPOSE 8080 8080
+EXPOSE 8868 8868
 
 ENTRYPOINT [ "sh", "-c", "/opt/scaleph/bin/scaleph.sh start-foreground" ]

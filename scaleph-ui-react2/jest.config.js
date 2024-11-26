@@ -1,5 +1,5 @@
 module.exports = {
-  testURL: 'http://localhost:8000',
+  testURL: 'http://localhost:8888',
   verbose: false,
   extraSetupFiles: ['./tests/setupTests.js'],
   globals: {

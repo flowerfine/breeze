@@ -52,7 +52,7 @@ spec:
           imagePullPolicy: {{ .Values.scalephapi.image.pullPolicy }}
           ports:
             - name: scaleph-api
-              containerPort: 8080
+              containerPort: 8868
               protocol: TCP
           livenessProbe:
             httpGet:

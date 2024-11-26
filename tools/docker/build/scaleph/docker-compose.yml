@@ -27,7 +27,7 @@ services:
       context: ../../../../
       dockerfile: tools/docker/build/scaleph-api/Dockerfile
     ports:
-      - 8080:8080
+      - 8868:8868
     networks:
       - scaleph
 
@@ -38,9 +38,9 @@ services:
       context: ../../../../
       dockerfile: tools/docker/build/scaleph-ui-react/Dockerfile.local
     environment:
-      - SCALEPH_API_URL="scaleph-api:8080"
+      - SCALEPH_API_URL="scaleph-api:8868"
     ports:
-      - 80:80
+      - 8888:8888
     networks:
       - scaleph
 

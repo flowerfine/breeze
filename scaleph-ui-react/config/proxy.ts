@@ -12,13 +12,13 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://localhost:8080/scaleph',
+      target: 'http://localhost:8868/scaleph',
       changeOrigin: true,
     },
   },
   pre: {
     '/api/': {
-      target: 'http://localhost:8080/scaleph',
+      target: 'http://localhost:8868/scaleph',
       changeOrigin: true,
     },
   },
