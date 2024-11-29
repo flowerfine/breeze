@@ -20,6 +20,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.sliew</groupId>
+        <artifactId>carp-spring-boot-parent</artifactId>
+        <version>0.0.4</version>
+    </parent>
     <groupId>cn.sliew</groupId>
     <artifactId>scaleph</artifactId>
     <version>2.0.6-SNAPSHOT</version>
@@ -120,43 +125,26 @@
         <docker.build.skip>true</docker.build.skip>
         <docker.push.skip>true</docker.push.skip>
 
-        <spring.boot.version>3.3.0</spring.boot.version>
-        <spring.cloud.version>2023.0.1</spring.cloud.version>
-        <mybatis.version>3.0.3</mybatis.version>
-        <mybatis.plus.version>3.5.6</mybatis.plus.version>
         <org.mapstruct.extensions.spring.version>0.1.1</org.mapstruct.extensions.spring.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <mapstruct.lombok.binding.version>0.2.0</mapstruct.lombok.binding.version>
         <org.projectlombok.version>1.18.24</org.projectlombok.version>
         <velocity.engine.version>2.2</velocity.engine.version>
-        <knife4j.version>4.4.0</knife4j.version>
         <auto-service.version>1.0.1</auto-service.version>
-        <hutool.version>5.8.27</hutool.version>
-        <commons.lang3.version>3.12.0</commons.lang3.version>
-        <commons.beanutils.version>1.9.4</commons.beanutils.version>
-        <commons.text.version>1.9</commons.text.version>
-        <commons.compress.version>1.19</commons.compress.version>
-        <commons.io.version>2.11.0</commons.io.version>
-        <commons.cli.version>1.5.0</commons.cli.version>
         <semver.version>0.9.0</semver.version>
         <disruptor.version>4.0.0</disruptor.version>
         <ojdbc.version>21.1.0.0</ojdbc.version>
-        <mysql.version>8.0.28</mysql.version>
         <clickhouse-jdbc.version>0.3.2</clickhouse-jdbc.version>
         <doris.version>5.1.26</doris.version>
-        <postgresql.version>42.3.3</postgresql.version>
         <druid.version>0.22.1</druid.version>
         <calcite-druid.version>1.29.0</calcite-druid.version>
         <config.version>1.4.3</config.version>
         <okhttp.version>4.10.0</okhttp.version>
-        <guava.version>32.1.3-jre</guava.version>
         <minio.version>8.3.8</minio.version>
         <carp.version>0.0.14</carp.version>
-        <milky.version>1.0.13</milky.version>
         <sakura.version>1.0.2</sakura.version>
         <hadoop.version>3.3.4</hadoop.version>
         <hive.version>3.1.3</hive.version>
-        <pekko.version>1.1.0-M1</pekko.version>
         <protobuf.version>3.21.5</protobuf.version>
         <netty.version>4.1.82.Final</netty.version>
         <flink.version>1.18.1</flink.version>
@@ -166,7 +154,6 @@
         <spring-cloud-openfeign.version>3.1.7</spring-cloud-openfeign.version>
         <zjsonpatch.version>0.4.14</zjsonpatch.version>
         <kogito.version>2.44.0.Alpha</kogito.version>
-        <redisson.version>3.27.2</redisson.version>
         <cola.version>4.3.2</cola.version>
         <fury.version>0.4.1</fury.version>
         <jgrapht.version>1.5.2</jgrapht.version>
@@ -175,40 +162,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!--            <dependency>-->
-            <!--                <groupId>org.springframework.cloud</groupId>-->
-            <!--                <artifactId>spring-cloud-openfeign-dependencies</artifactId>-->
-            <!--                <version>${spring-cloud-openfeign.version}</version>-->
-            <!--                <type>pom</type>-->
-            <!--                <scope>import</scope>-->
-            <!--            </dependency>-->
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-bom</artifactId>
-                <version>${micrometer.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-dependencies</artifactId>
-                <version>${knife4j.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>scaleph-common</artifactId>

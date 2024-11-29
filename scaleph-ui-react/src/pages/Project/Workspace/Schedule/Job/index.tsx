@@ -17,6 +17,7 @@ const ScheduleJobWeb: React.FC = () => {
     const formRef = useRef<ProFormInstance>();
     const [selectedRows, setSelectedRows] = useState<ScheduleJob[]>([]);
     const [scheduleGroups, setScheduleGroups] = useState<Array<ScheduleGroup>>();
+    const [jobGroupId, setJobGroupId] = useState<number>();
     const [scheduleJobFormData, setScheduleJobFormData] = useState<{
         visiable: boolean;
         data: ScheduleJob;
@@ -25,6 +26,7 @@ const ScheduleJobWeb: React.FC = () => {
 
     useEffect(() => {
         if (scheduleGroups) {
+            setJobGroupId(scheduleGroups[0].id)
             formRef.current?.setFieldValue("jobGroupId", scheduleGroups[0].id)
             formRef.current?.submit()
         }
@@ -32,7 +34,7 @@ const ScheduleJobWeb: React.FC = () => {
 
     const tableColumns: ProColumns<ScheduleJob>[] = [
         {
-            title: intl.formatMessage({id: 'pages.project.schedule.group'}),
+            title: intl.formatMessage({id: 'pages.project.schedule.job.jobGroupId'}),
             dataIndex: 'jobGroupId',
             hideInTable: true,
             request: (params, props) => {
@@ -48,6 +50,12 @@ const ScheduleJobWeb: React.FC = () => {
                     })
                 })
             },
+            fieldProps: (form, config) => {
+                return {
+                    allowClear: false,
+                    onChange: (value) => setJobGroupId(value)
+                }
+            }
         },
         {
             title: intl.formatMessage({id: 'pages.project.schedule.job.name'}),
@@ -195,7 +203,7 @@ const ScheduleJobWeb: React.FC = () => {
         {scheduleJobFormData.visiable && (
             <ScheduleJobForm
                 visible={scheduleJobFormData.visiable}
-                data={scheduleJobFormData.data}
+                data={{jobGroupIdData: jobGroupId, job: scheduleJobFormData.data}}
                 onCancel={() => {
                     setScheduleJobFormData({visiable: false, data: {}});
                 }}

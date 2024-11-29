@@ -43,7 +43,6 @@ const ScheduleGroupForm: React.FC<ModalFormProps<ScheduleGroup>> = ({data, visib
                     name: values.name,
                     remark: values.remark
                 };
-                console.log('values', dataValue, param)
                 return values.id
                     ? WsScheduleGroupService.update(param).then((response) => {
                         if (response.success) {
