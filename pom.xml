@@ -23,7 +23,7 @@
     <parent>
         <groupId>cn.sliew</groupId>
         <artifactId>carp-spring-boot-parent</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.17</version>
     </parent>
     <groupId>cn.sliew</groupId>
     <artifactId>scaleph</artifactId>
@@ -141,7 +141,8 @@
         <config.version>1.4.3</config.version>
         <okhttp.version>4.10.0</okhttp.version>
         <minio.version>8.3.8</minio.version>
-        <carp.version>0.0.14</carp.version>
+        <carp.version>0.0.19</carp.version>
+        <milky.version>1.0.13</milky.version>
         <sakura.version>1.0.2</sakura.version>
         <hadoop.version>3.3.4</hadoop.version>
         <hive.version>3.1.3</hive.version>
@@ -347,39 +348,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- mybatis-plus 依赖的 mybatis-spring 版本过低，与 springboot 3.2.0 版本不兼容 -->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis.plus.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mybatis</groupId>
-                        <artifactId>mybatis-spring</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-core</artifactId>
-                <version>${mybatis.plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis.plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.engine.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-clients</artifactId>
@@ -404,42 +372,6 @@
             </dependency>
 
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons.lang3.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>${commons.beanutils.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-text</artifactId>
-                <version>${commons.text.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>${commons.compress.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-cli</groupId>
-                <artifactId>commons-cli</artifactId>
-                <version>${commons.cli.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.github.zafarkhaja</groupId>
                 <artifactId>java-semver</artifactId>
                 <version>${semver.version}</version>
@@ -451,16 +383,6 @@
                 <version>${disruptor.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>cn.sliew</groupId>
-                <artifactId>carp-framework-common</artifactId>
-                <version>${carp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.sliew</groupId>
-                <artifactId>carp-framework-dag</artifactId>
-                <version>${carp.version}</version>
-            </dependency>
             <dependency>
                 <groupId>cn.sliew</groupId>
                 <artifactId>carp-module-security-spring</artifactId>
@@ -481,6 +403,7 @@
                 <artifactId>carp-module-datasource</artifactId>
                 <version>${carp.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.sliew</groupId>
                 <artifactId>milky-common</artifactId>
@@ -495,73 +418,6 @@
                 <groupId>cn.sliew</groupId>
                 <artifactId>milky-test</artifactId>
                 <version>${milky.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-common</artifactId>
-                <version>${hadoop.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-reload4j</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>ch.qos.reload4j</groupId>
-                        <artifactId>reload4j</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>javax.servlet-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.servlet.jsp</groupId>
-                        <artifactId>jsp-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-hdfs-client</artifactId>
-                <version>${hadoop.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-hdfs</artifactId>
-                <version>${hadoop.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-aliyun</artifactId>
-                <version>${hadoop.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-aws</artifactId>
-                <version>${hadoop.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hive</groupId>
-                <artifactId>hive-metastore</artifactId>
-                <version>${hive.version}</version>
             </dependency>
 
             <dependency>
@@ -621,21 +477,6 @@
 
             <dependency>
                 <groupId>org.apache.pekko</groupId>
-                <artifactId>pekko-actor-typed_${scala.binary.version}</artifactId>
-                <version>${pekko.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.pekko</groupId>
-                <artifactId>pekko-cluster-typed_${scala.binary.version}</artifactId>
-                <version>${pekko.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.pekko</groupId>
-                <artifactId>pekko-stream_${scala.binary.version}</artifactId>
-                <version>${pekko.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.pekko</groupId>
                 <artifactId>pekko-serialization-jackson_${scala.binary.version}</artifactId>
                 <version>${pekko.version}</version>
             </dependency>
@@ -658,53 +499,6 @@
                 <version>${okhttp.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>ru.yandex.clickhouse</groupId>
-                <artifactId>clickhouse-jdbc</artifactId>
-                <version>${clickhouse-jdbc.version}</version>
-            </dependency>
-            <!--<dependency>
-                <groupId>org.apache.druid</groupId>
-                <artifactId>druid-indexing-service</artifactId>
-                <version>${druid.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>javax.servlet-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-core</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.calcite</groupId>
-                <artifactId>calcite-druid</artifactId>
-                <version>${calcite-druid.version}</version>
-            </dependency>-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-                <scope>test</scope>
-            </dependency>
             <dependency>
                 <groupId>com.oracle.database.jdbc</groupId>
                 <artifactId>ojdbc8</artifactId>
@@ -738,18 +532,6 @@
                 <groupId>org.kie.kogito</groupId>
                 <artifactId>kogito-serverless-workflow-runtime</artifactId>
                 <version>${kogito.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cola</groupId>
-                <artifactId>cola-component-statemachine</artifactId>
-                <version>${cola.version}</version>
             </dependency>
 
             <dependency>
