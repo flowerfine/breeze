@@ -23,7 +23,7 @@
     <parent>
         <groupId>cn.sliew</groupId>
         <artifactId>carp-spring-boot-parent</artifactId>
-        <version>0.0.17</version>
+        <version>0.0.18</version>
     </parent>
     <groupId>cn.sliew</groupId>
     <artifactId>scaleph</artifactId>
