@@ -9,7 +9,6 @@
         <version>2.0.6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>scaleph-plugin-datasource-doris</artifactId>
 
     <dependencies>
@@ -31,10 +30,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${doris.version}</version>
-            <optional>true</optional>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
     </dependencies>
 

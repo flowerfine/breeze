@@ -33,7 +33,6 @@
         <dependency>
             <groupId>ru.yandex.clickhouse</groupId>
             <artifactId>clickhouse-jdbc</artifactId>
-            <version>${clickhouse-jdbc.version}</version>
         </dependency>
     </dependencies>
 
