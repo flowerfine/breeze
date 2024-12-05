@@ -115,6 +115,10 @@ const SinkHbaseStepForm: React.FC<ModalFormProps<Node>> = ({data, visible, onVis
           initialValue={"utf8"}
           options={["utf8", "gbk"]}
         />
+        <ProFormDigit
+          name={HbaseParams.ttl}
+          label={intl.formatMessage({id: 'pages.project.di.step.hbase.ttl'})}
+        />
 
         <ProFormGroup
           title={intl.formatMessage({id: 'pages.project.di.step.hbase.hbaseExtraConfig'})}

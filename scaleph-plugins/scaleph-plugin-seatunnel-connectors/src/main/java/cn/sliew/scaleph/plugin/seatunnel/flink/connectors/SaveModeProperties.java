@@ -32,7 +32,7 @@ public enum SaveModeProperties {
             .type(PropertyType.STRING)
             .parser(Parsers.STRING_PARSER)
             .defaultValue("CREATE_SCHEMA_WHEN_NOT_EXIST")
-            .allowableValues("CREATE_SCHEMA_WHEN_NOT_EXIST", "RECREATE_SCHEMA", "ERROR_WHEN_SCHEMA_NOT_EXIST")
+            .allowableValues("CREATE_SCHEMA_WHEN_NOT_EXIST", "RECREATE_SCHEMA", "ERROR_WHEN_SCHEMA_NOT_EXIST", "IGNORE")
             .addValidator(Validators.NON_BLANK_VALIDATOR)
             .validateAndBuild();
 

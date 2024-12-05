@@ -868,6 +868,7 @@ export default {
   'pages.project.di.step.hbase.walWrite': '是否启用WAL',
   'pages.project.di.step.hbase.writeBufferSize': '写缓存大小',
   'pages.project.di.step.hbase.encoding': '编码方式',
+  'pages.project.di.step.hbase.ttl': 'TTL',
   'pages.project.di.step.hbase.hbaseExtraConfig': 'HBase额外配置',
   'pages.project.di.step.hbase.hbaseExtraConfig.tooltip': 'HBase的额外配置信息',
 

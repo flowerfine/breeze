@@ -99,4 +99,12 @@ public enum HbaseSinkProperties {
             .addValidator(Validators.NON_BLANK_VALIDATOR)
             .validateAndBuild();
 
+    public static final PropertyDescriptor<Long> TTL = new PropertyDescriptor.Builder()
+            .name("ttl")
+            .description("Hbase writes data TTL time")
+            .type(PropertyType.LONG)
+            .parser(Parsers.LONG_PARSER)
+            .addValidator(Validators.LONG_VALIDATOR)
+            .validateAndBuild();
+
 }

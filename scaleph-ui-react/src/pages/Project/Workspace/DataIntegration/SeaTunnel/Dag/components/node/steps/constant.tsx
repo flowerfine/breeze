@@ -736,6 +736,7 @@ export const HbaseParams = {
   writeBufferSize: 'write_buffer_size',
   encoding: 'encoding',
   hbaseExtraConfig: 'hbase_extra_config',
+  ttl: 'ttl',
 }
 
 export const PaimonParams = {

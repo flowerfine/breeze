@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hbase.sink;
+package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.sink;
 
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
@@ -29,38 +29,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hbase.HbaseProperties.TABLE;
-import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hbase.HbaseProperties.ZOOOKEEPER_QUORUM;
-import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hbase.sink.HbaseSinkProperties.*;
+import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.SaveModeProperties.SCHEMA_SAVE_MODE;
+import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.HudiProperties.CONF_FILES_PATH;
+import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.HudiProperties.TABLE_DFS_PATH;
+import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.sink.HudiSinkProperties.AUTO_COMMIT;
+import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.sink.HudiSinkProperties.TABLE_LIST;
 
 @AutoService(SeaTunnelConnectorPlugin.class)
-public class HbaseSinkPlugin extends SeaTunnelConnectorPlugin {
+public class HudiSinkPlugin extends SeaTunnelConnectorPlugin {
 
-    public HbaseSinkPlugin() {
+    public HudiSinkPlugin() {
         this.pluginInfo = new PluginInfo(getIdentity(),
-                "Output data to Hbase",
-                HbaseSinkPlugin.class.getName());
+                "Hudi sink connector",
+                HudiSinkPlugin.class.getName());
 
         final List<PropertyDescriptor> props = new ArrayList<>();
-        props.add(ZOOOKEEPER_QUORUM);
-        props.add(TABLE);
-        props.add(ROWKEY_COLUMN);
-        props.add(FAMILY_NAME);
-        props.add(ROWKEY_DELIMITER);
-        props.add(VERSION_COLUMN);
-        props.add(NULL_MODE);
-        props.add(WAL_WRITE);
-        props.add(WRITE_BUFFER_SIZE);
-        props.add(ENCODING);
-        props.add(HBASE_EXTRA_CONFIG);
-        props.add(TTL);
+        props.add(TABLE_DFS_PATH);
+        props.add(CONF_FILES_PATH);
+        props.add(AUTO_COMMIT);
+        props.add(SCHEMA_SAVE_MODE);
+        props.add(TABLE_LIST);
         props.add(CommonProperties.PARALLELISM);
-        props.add(CommonProperties.SOURCE_TABLE_NAME);
+        props.add(CommonProperties.RESULT_TABLE_NAME);
         supportedProperties = Collections.unmodifiableList(props);
     }
 
     @Override
     protected SeaTunnelPluginMapping getPluginMapping() {
-        return SeaTunnelPluginMapping.SINK_HBASE;
+        return SeaTunnelPluginMapping.SINK_HUDI;
     }
 }
