@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.oss.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.OSSDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.OSSDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -78,11 +79,13 @@ public class OSSSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        OSSDataSource dataSource = (OSSDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(ENDPOINT.getName(), dataSource.getEndpoint());
-        conf.putPOJO(BUCKET.getName(), dataSource.getBucket());
-        conf.putPOJO(ACCESS_KEY.getName(), dataSource.getAccessKey());
-        conf.putPOJO(ACCESS_SECRET.getName(), dataSource.getAccessSecret());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        OSSDataSourceProperties props = (OSSDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(ENDPOINT.getName(), props.getEndpoint());
+        conf.putPOJO(BUCKET.getName(), props.getBucket());
+        conf.putPOJO(ACCESS_KEY.getName(), props.getAccessKey());
+        conf.putPOJO(ACCESS_SECRET.getName(), props.getAccessSecret());
         return conf;
     }
 

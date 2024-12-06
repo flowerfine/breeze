@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.s3.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.S3DataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.S3DataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -79,10 +80,12 @@ public class S3SourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        S3DataSource dataSource = (S3DataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(BUCKET.getName(), dataSource.getBucket());
-        conf.putPOJO(ACCESS_KEY.getName(), dataSource.getAccessKey());
-        conf.putPOJO(ACCESS_SECRET.getName(), dataSource.getAccessSecret());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        S3DataSourceProperties props = (S3DataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(BUCKET.getName(), props.getBucket());
+        conf.putPOJO(ACCESS_KEY.getName(), props.getAccessKey());
+        conf.putPOJO(ACCESS_SECRET.getName(), props.getAccessSecret());
         return conf;
     }
 

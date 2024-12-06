@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.elasticsearch.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.nosql.ElasticsearchDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.nosql.ElasticsearchDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -77,12 +78,14 @@ public class ElasticsearchSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        ElasticsearchDataSource dataSource = (ElasticsearchDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        List<String> hosts = Arrays.stream(StringUtils.commaDelimitedListToStringArray(dataSource.getHosts())).map(String::trim).collect(Collectors.toList());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        ElasticsearchDataSourceProperties props = (ElasticsearchDataSourceProperties) dataSourceInfo.getProps();
+
+        List<String> hosts = Arrays.stream(StringUtils.commaDelimitedListToStringArray(props.getHosts())).map(String::trim).collect(Collectors.toList());
         conf.putPOJO(HOSTS.getName(), hosts);
-        if (StringUtils.hasText(dataSource.getUsername())) {
-            conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        if (StringUtils.hasText(props.getUsername())) {
+            conf.putPOJO(USERNAME.getName(), props.getUsername());
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
         }
         return conf;
     }

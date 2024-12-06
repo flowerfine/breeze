@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.doris.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.olap.DorisDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.olap.DorisDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -37,7 +38,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.doris.DorisProperties.*;
-import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.doris.DorisProperties.DORIS_BATCH_SIZE;
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.doris.source.DorisSourceProperties.*;
 
 @AutoService(SeaTunnelConnectorPlugin.class)
@@ -72,16 +72,18 @@ public class DorisSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        DorisDataSource dataSource = (DorisDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(FENODES.getName(), dataSource.getNodeUrls());
-        if (StringUtils.hasText(dataSource.getUsername())) {
-            conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        DorisDataSourceProperties props = (DorisDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(FENODES.getName(), props.getNodeUrls());
+        if (StringUtils.hasText(props.getUsername())) {
+            conf.putPOJO(USERNAME.getName(), props.getUsername());
         }
-        if (StringUtils.hasText(dataSource.getPassword())) {
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        if (StringUtils.hasText(props.getPassword())) {
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
         }
-        if (dataSource.getQueryPort() != null) {
-            conf.putPOJO(QUERY_PORT.getName(), dataSource.getQueryPort());
+        if (props.getQueryPort() != null) {
+            conf.putPOJO(QUERY_PORT.getName(), props.getQueryPort());
         }
         return conf;
     }

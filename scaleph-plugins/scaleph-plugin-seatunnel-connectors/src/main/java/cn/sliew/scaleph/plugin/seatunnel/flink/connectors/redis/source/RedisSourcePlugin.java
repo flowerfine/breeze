@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.redis.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.nosql.RedisDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.nosql.RedisDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -70,20 +71,22 @@ public class RedisSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        RedisDataSource dataSource = (RedisDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(HOST.getName(), dataSource.getHost());
-        conf.putPOJO(PORT.getName(), dataSource.getPort());
-        if (StringUtils.hasText(dataSource.getUser())) {
-            conf.putPOJO(USER.getName(), dataSource.getUser());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        RedisDataSourceProperties props = (RedisDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(HOST.getName(), props.getHost());
+        conf.putPOJO(PORT.getName(), props.getPort());
+        if (StringUtils.hasText(props.getUser())) {
+            conf.putPOJO(USER.getName(), props.getUser());
         }
-        if (StringUtils.hasText(dataSource.getPassword())) {
-            conf.putPOJO(AUTH.getName(), dataSource.getPassword());
+        if (StringUtils.hasText(props.getPassword())) {
+            conf.putPOJO(AUTH.getName(), props.getPassword());
         }
-        if (dataSource.getMode() != null) {
-            conf.putPOJO(MODE.getName(), dataSource.getMode().getValue());
+        if (props.getMode() != null) {
+            conf.putPOJO(MODE.getName(), props.getMode().getValue());
         }
-        if (CollectionUtils.isEmpty(dataSource.getNodes()) == false) {
-            conf.putPOJO(NODES.getName(), dataSource.getNodes().stream().map(RedisDataSource.Node::getNode).collect(Collectors.toList()));
+        if (CollectionUtils.isEmpty(props.getNodes()) == false) {
+            conf.putPOJO(NODES.getName(), props.getNodes().stream().map(RedisDataSourceProperties.Node::getNode).collect(Collectors.toList()));
         }
         return conf;
     }

@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.sftp.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.SftpDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.SftpDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -78,11 +79,13 @@ public class SftpFileSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        SftpDataSource dataSource = (SftpDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(HOST.getName(), dataSource.getHost());
-        conf.putPOJO(PORT.getName(), dataSource.getPort());
-        conf.putPOJO(USER.getName(), dataSource.getUsername());
-        conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        SftpDataSourceProperties props = (SftpDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(HOST.getName(), props.getHost());
+        conf.putPOJO(PORT.getName(), props.getPort());
+        conf.putPOJO(USER.getName(), props.getUsername());
+        conf.putPOJO(PASSWORD.getName(), props.getPassword());
         return conf;
     }
 

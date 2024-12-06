@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.neo4j.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.Neo4jDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.Neo4jDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -66,17 +67,19 @@ public class Neo4jSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        Neo4jDataSource dataSource = (Neo4jDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(URI.getName(), dataSource.getUri());
-        if (StringUtils.hasText(dataSource.getUsername())) {
-            conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        Neo4jDataSourceProperties props = (Neo4jDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(URI.getName(), props.getUri());
+        if (StringUtils.hasText(props.getUsername())) {
+            conf.putPOJO(USERNAME.getName(), props.getUsername());
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
         }
-        if (StringUtils.hasText(dataSource.getBearerToken())) {
-            conf.putPOJO(BEARER_TOKEN.getName(), dataSource.getBearerToken());
+        if (StringUtils.hasText(props.getBearerToken())) {
+            conf.putPOJO(BEARER_TOKEN.getName(), props.getBearerToken());
         }
-        if (StringUtils.hasText(dataSource.getKerberosTicket())) {
-            conf.putPOJO(KERBEROS_TICKET.getName(), dataSource.getKerberosTicket());
+        if (StringUtils.hasText(props.getKerberosTicket())) {
+            conf.putPOJO(KERBEROS_TICKET.getName(), props.getKerberosTicket());
         }
         return conf;
     }

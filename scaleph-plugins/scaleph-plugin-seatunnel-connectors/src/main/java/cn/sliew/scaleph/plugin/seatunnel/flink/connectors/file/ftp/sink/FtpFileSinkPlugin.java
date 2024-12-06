@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.ftp.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.FtpDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.FtpDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -38,7 +39,6 @@ import java.util.List;
 
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.FileProperties.*;
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.FileSinkProperties.*;
-import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.FileSinkProperties.TMP_PATH;
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.ftp.FtpFileProperties.*;
 
 @AutoService(SeaTunnelConnectorPlugin.class)
@@ -87,13 +87,15 @@ public class FtpFileSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        FtpDataSource dataSource = (FtpDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(HOST.getName(), dataSource.getHost());
-        conf.putPOJO(PORT.getName(), dataSource.getPort());
-        conf.putPOJO(USER.getName(), dataSource.getUsername());
-        conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
-        if (StringUtils.hasText(dataSource.getConnectionMode())) {
-            conf.putPOJO(CONNECTION_MODE.getName(), dataSource.getConnectionMode());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        FtpDataSourceProperties props = (FtpDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(HOST.getName(), props.getHost());
+        conf.putPOJO(PORT.getName(), props.getPort());
+        conf.putPOJO(USER.getName(), props.getUsername());
+        conf.putPOJO(PASSWORD.getName(), props.getPassword());
+        if (StringUtils.hasText(props.getConnectionMode())) {
+            conf.putPOJO(CONNECTION_MODE.getName(), props.getConnectionMode());
         }
         return conf;
     }

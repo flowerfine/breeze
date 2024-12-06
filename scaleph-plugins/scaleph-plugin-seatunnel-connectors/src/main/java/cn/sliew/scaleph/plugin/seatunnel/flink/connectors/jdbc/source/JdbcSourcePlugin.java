@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.jdbc.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.jdbc.JdbcDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.jdbc.JdbcDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -77,11 +78,13 @@ public class JdbcSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        JdbcDataSource dataSource = (JdbcDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(URL.getName(), dataSource.getUrl());
-        conf.putPOJO(DRIVER.getName(), dataSource.getDriverClassName());
-        conf.putPOJO(USER.getName(), dataSource.getUser());
-        conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        JdbcDataSourceProperties props = (JdbcDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(URL.getName(), props.getUrl());
+        conf.putPOJO(DRIVER.getName(), props.getDriverClassName());
+        conf.putPOJO(USER.getName(), props.getUser());
+        conf.putPOJO(PASSWORD.getName(), props.getPassword());
         return conf;
     }
 

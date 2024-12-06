@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.ossjindo.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.OSSJindoDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.OSSJindoDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -85,11 +86,13 @@ public class OSSJindoSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        OSSJindoDataSource dataSource = (OSSJindoDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(ENDPOINT.getName(), dataSource.getEndpoint());
-        conf.putPOJO(BUCKET.getName(), dataSource.getBucket());
-        conf.putPOJO(ACCESS_KEY.getName(), dataSource.getAccessKey());
-        conf.putPOJO(ACCESS_SECRET.getName(), dataSource.getAccessSecret());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        OSSJindoDataSourceProperties props = (OSSJindoDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(ENDPOINT.getName(), props.getEndpoint());
+        conf.putPOJO(BUCKET.getName(), props.getBucket());
+        conf.putPOJO(ACCESS_KEY.getName(), props.getAccessKey());
+        conf.putPOJO(ACCESS_SECRET.getName(), props.getAccessSecret());
         return conf;
     }
 

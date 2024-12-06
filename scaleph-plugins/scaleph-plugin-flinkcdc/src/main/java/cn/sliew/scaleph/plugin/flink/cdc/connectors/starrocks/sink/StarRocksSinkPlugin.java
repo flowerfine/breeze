@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.flink.cdc.connectors.starrocks.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.olap.StarRocksDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.flink.cdc.FlinkCDCPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.olap.StarRocksDataSource;
 import cn.sliew.scaleph.plugin.flink.cdc.FlinkCDCPipilineConnectorPlugin;
 import cn.sliew.scaleph.plugin.flink.cdc.connectors.CommonProperties;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
@@ -73,11 +74,13 @@ public class StarRocksSinkPlugin extends FlinkCDCPipilineConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        StarRocksDataSource dataSource = (StarRocksDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(JDBC_URL.getName(), dataSource.getNodeUrls());
-        conf.putPOJO(LOAD_URL.getName(), dataSource.getNodeUrls());
-        conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
-        conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        StarRocksDataSourceProperties props = (StarRocksDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(JDBC_URL.getName(), props.getNodeUrls());
+        conf.putPOJO(LOAD_URL.getName(), props.getNodeUrls());
+        conf.putPOJO(USERNAME.getName(), props.getUsername());
+        conf.putPOJO(PASSWORD.getName(), props.getPassword());
         return conf;
     }
 

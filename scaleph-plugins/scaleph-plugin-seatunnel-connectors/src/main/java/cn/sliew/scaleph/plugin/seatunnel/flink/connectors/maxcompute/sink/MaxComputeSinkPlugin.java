@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.maxcompute.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.olap.MaxComputeDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.olap.MaxComputeDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -65,10 +66,12 @@ public class MaxComputeSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        MaxComputeDataSource dataSource = (MaxComputeDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(ENDPOINT.getName(), dataSource.getEndpoint());
-        conf.putPOJO(ACCESS_ID.getName(), dataSource.getAccessId());
-        conf.putPOJO(ACCESS_KEY.getName(), dataSource.getAccesskey());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        MaxComputeDataSourceProperties props = (MaxComputeDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(ENDPOINT.getName(), props.getEndpoint());
+        conf.putPOJO(ACCESS_ID.getName(), props.getAccessId());
+        conf.putPOJO(ACCESS_KEY.getName(), props.getAccesskey());
         return conf;
     }
 

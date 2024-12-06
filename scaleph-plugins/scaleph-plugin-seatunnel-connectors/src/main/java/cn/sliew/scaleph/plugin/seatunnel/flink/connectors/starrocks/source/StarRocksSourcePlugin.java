@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.starrocks.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.olap.StarRocksDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.olap.StarRocksDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -72,13 +73,15 @@ public class StarRocksSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        StarRocksDataSource dataSource = (StarRocksDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(NODE_URLS.getName(), StringUtils.commaDelimitedListToStringArray(dataSource.getNodeUrls()));
-        if (StringUtils.hasText(dataSource.getUsername())) {
-            conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        StarRocksDataSourceProperties props = (StarRocksDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(NODE_URLS.getName(), StringUtils.commaDelimitedListToStringArray(props.getNodeUrls()));
+        if (StringUtils.hasText(props.getUsername())) {
+            conf.putPOJO(USERNAME.getName(), props.getUsername());
         }
-        if (StringUtils.hasText(dataSource.getPassword())) {
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        if (StringUtils.hasText(props.getPassword())) {
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
         }
         return conf;
     }

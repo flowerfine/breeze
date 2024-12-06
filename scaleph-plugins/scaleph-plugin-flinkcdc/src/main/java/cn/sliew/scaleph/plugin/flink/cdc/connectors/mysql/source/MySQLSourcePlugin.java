@@ -18,10 +18,11 @@
 
 package cn.sliew.scaleph.plugin.flink.cdc.connectors.mysql.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.jdbc.MySQLDataSourceProperties;
 import cn.sliew.milky.common.exception.Rethrower;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.flink.cdc.FlinkCDCPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.jdbc.MySQLDataSource;
 import cn.sliew.scaleph.plugin.flink.cdc.FlinkCDCPipilineConnectorPlugin;
 import cn.sliew.scaleph.plugin.flink.cdc.connectors.CommonProperties;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
@@ -81,12 +82,14 @@ public class MySQLSourcePlugin extends FlinkCDCPipilineConnectorPlugin {
         try {
             ObjectNode conf = super.createConf();
             JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-            MySQLDataSource dataSource = (MySQLDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-            URI url = new URI(dataSource.getUrl().replace("jdbc:", ""));
+            DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+            MySQLDataSourceProperties props = (MySQLDataSourceProperties) dataSourceInfo.getProps();
+
+            URI url = new URI(props.getUrl().replace("jdbc:", ""));
             conf.putPOJO(HOSTNAME.getName(), url.getHost());
             conf.putPOJO(PORT.getName(), url.getPort());
-            conf.putPOJO(USERNAME.getName(), dataSource.getUser());
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+            conf.putPOJO(USERNAME.getName(), props.getUser());
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
             return conf;
         } catch (URISyntaxException e) {
             Rethrower.throwAs(e);

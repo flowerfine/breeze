@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.pulsar.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.mq.PulsarDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.mq.PulsarDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -77,14 +78,16 @@ public class PulsarSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        PulsarDataSource dataSource = (PulsarDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(ADMIN_SERVICE_URL.getName(), dataSource.getWebServiceUrl());
-        conf.putPOJO(CLIENT_SERVICE_URL.getName(), dataSource.getClientServiceUrl());
-        if (StringUtils.hasText(dataSource.getAuthPlugin())) {
-            conf.putPOJO(AUTH_PLUGIN_CLASS.getName(), dataSource.getAuthPlugin());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        PulsarDataSourceProperties props = (PulsarDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(ADMIN_SERVICE_URL.getName(), props.getWebServiceUrl());
+        conf.putPOJO(CLIENT_SERVICE_URL.getName(), props.getClientServiceUrl());
+        if (StringUtils.hasText(props.getAuthPlugin())) {
+            conf.putPOJO(AUTH_PLUGIN_CLASS.getName(), props.getAuthPlugin());
         }
-        if (StringUtils.hasText(dataSource.getAuthParams())) {
-            conf.putPOJO(AUTH_PARAMS.getName(), dataSource.getAuthParams());
+        if (StringUtils.hasText(props.getAuthParams())) {
+            conf.putPOJO(AUTH_PARAMS.getName(), props.getAuthParams());
         }
         return conf;
     }

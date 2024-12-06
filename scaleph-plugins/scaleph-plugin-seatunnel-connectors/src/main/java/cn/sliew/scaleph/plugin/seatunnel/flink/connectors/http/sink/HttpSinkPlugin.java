@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.http.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.HttpDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.HttpDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -68,9 +69,11 @@ public class HttpSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        HttpDataSource dataSource = (HttpDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        checkState(dataSource.getMethod().equalsIgnoreCase("POST"), () -> "Http sink plugin only support POST method");
-        conf.putPOJO(URL.getName(), dataSource.getUrl());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        HttpDataSourceProperties props = (HttpDataSourceProperties) dataSourceInfo.getProps();
+
+        checkState(props.getMethod().equalsIgnoreCase("POST"), () -> "Http sink plugin only support POST method");
+        conf.putPOJO(URL.getName(), props.getUrl());
         return conf;
     }
 

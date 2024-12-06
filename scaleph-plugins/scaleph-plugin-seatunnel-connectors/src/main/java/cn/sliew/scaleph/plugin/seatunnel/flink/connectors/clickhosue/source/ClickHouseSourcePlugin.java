@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.clickhosue.source;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.olap.ClickHouseDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.olap.ClickHouseDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -65,11 +66,13 @@ public class ClickHouseSourcePlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        ClickHouseDataSource dataSource = (ClickHouseDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(HOST.getName(), dataSource.getHost());
-        conf.putPOJO(DATABASE.getName(), dataSource.getDatabase());
-        conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
-        conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        ClickHouseDataSourceProperties props = (ClickHouseDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(HOST.getName(), props.getHost());
+        conf.putPOJO(DATABASE.getName(), props.getDatabase());
+        conf.putPOJO(USERNAME.getName(), props.getUsername());
+        conf.putPOJO(PASSWORD.getName(), props.getPassword());
         return conf;
     }
 

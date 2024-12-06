@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.influxdb.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.InfluxDBDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.InfluxDBDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -71,13 +72,15 @@ public class InfluxDBSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        InfluxDBDataSource dataSource = (InfluxDBDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.putPOJO(URL.getName(), dataSource.getUrl());
-        if (StringUtils.hasText(dataSource.getUsername())) {
-            conf.putPOJO(USERNAME.getName(), dataSource.getUsername());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        InfluxDBDataSourceProperties props = (InfluxDBDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.putPOJO(URL.getName(), props.getUrl());
+        if (StringUtils.hasText(props.getUsername())) {
+            conf.putPOJO(USERNAME.getName(), props.getUsername());
         }
-        if (StringUtils.hasText(dataSource.getPassword())) {
-            conf.putPOJO(PASSWORD.getName(), dataSource.getPassword());
+        if (StringUtils.hasText(props.getPassword())) {
+            conf.putPOJO(PASSWORD.getName(), props.getPassword());
         }
         return conf;
     }

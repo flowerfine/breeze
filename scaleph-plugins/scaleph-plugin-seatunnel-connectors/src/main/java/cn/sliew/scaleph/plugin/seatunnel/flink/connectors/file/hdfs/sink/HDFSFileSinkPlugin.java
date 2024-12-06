@@ -18,9 +18,10 @@
 
 package cn.sliew.scaleph.plugin.seatunnel.flink.connectors.file.hdfs.sink;
 
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.file.HDFSDataSourceProperties;
+import cn.sliew.milky.common.util.JacksonUtil;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelPluginMapping;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.file.HDFSDataSource;
 import cn.sliew.scaleph.plugin.framework.core.PluginInfo;
 import cn.sliew.scaleph.plugin.framework.property.PropertyDescriptor;
 import cn.sliew.scaleph.plugin.seatunnel.flink.SeaTunnelConnectorPlugin;
@@ -87,10 +88,12 @@ public class HDFSFileSinkPlugin extends SeaTunnelConnectorPlugin {
     public ObjectNode createConf() {
         ObjectNode conf = super.createConf();
         JsonNode jsonNode = properties.get(ResourceProperties.DATASOURCE);
-        HDFSDataSource dataSource = (HDFSDataSource) AbstractDataSource.fromDsInfo((ObjectNode) jsonNode);
-        conf.put(FS_DEFAULT_FS.getName(), dataSource.getFsDefaultFS());
-        if (StringUtils.hasText(dataSource.getHdfsSitePath())) {
-            conf.put(HDFS_SITE_PATH.getName(), dataSource.getHdfsSitePath());
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(jsonNode, DataSourceInfo.class);
+        HDFSDataSourceProperties props = (HDFSDataSourceProperties) dataSourceInfo.getProps();
+
+        conf.put(FS_DEFAULT_FS.getName(), props.getFsDefaultFS());
+        if (StringUtils.hasText(props.getHdfsSitePath())) {
+            conf.put(HDFS_SITE_PATH.getName(), props.getHdfsSitePath());
         }
         return conf;
     }
