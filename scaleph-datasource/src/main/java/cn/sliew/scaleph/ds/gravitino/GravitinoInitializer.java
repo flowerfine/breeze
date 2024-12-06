@@ -19,16 +19,15 @@
 package cn.sliew.scaleph.ds.gravitino;
 
 import cn.sliew.carp.framework.common.dict.datasource.DataSourceType;
+import cn.sliew.carp.module.datasource.modal.DataSourceInfo;
+import cn.sliew.carp.module.datasource.modal.jdbc.MySQLDataSourceProperties;
 import cn.sliew.carp.module.datasource.service.CarpDsInfoService;
 import cn.sliew.carp.module.datasource.service.dto.DsInfoDTO;
 import cn.sliew.milky.common.util.JacksonUtil;
-import cn.sliew.scaleph.ds.modal.AbstractDataSource;
-import cn.sliew.scaleph.ds.modal.jdbc.JdbcDataSource;
 import com.datastrato.gravitino.Catalog;
 import com.datastrato.gravitino.NameIdentifier;
 import com.datastrato.gravitino.client.GravitinoAdminClient;
 import com.datastrato.gravitino.client.GravitinoMetalake;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -107,12 +106,13 @@ public class GravitinoInitializer implements InitializingBean {
     }
 
     private void initMySQL(GravitinoMetalake metalake, NameIdentifier catalogName, DsInfoDTO dsInfoDTO) {
-        JdbcDataSource dataSource = (JdbcDataSource) AbstractDataSource.fromDsInfo((ObjectNode) JacksonUtil.toJsonNode(dsInfoDTO));
+        DataSourceInfo dataSourceInfo = JacksonUtil.toObject(JacksonUtil.toJsonNode(dsInfoDTO), DataSourceInfo.class);
+        MySQLDataSourceProperties props = (MySQLDataSourceProperties) dataSourceInfo.getProps();
         Map<String, String> properties = new HashMap<>();
-        properties.put("jdbc-driver", dataSource.getDriverClassName());
-        properties.put("jdbc-url", dataSource.getUrl());
-        properties.put("jdbc-user", dataSource.getUser());
-        properties.put("jdbc-password", dataSource.getPassword());
-        metalake.createCatalog(catalogName, Catalog.Type.RELATIONAL, "jdbc-mysql", dataSource.getRemark(), properties);
+        properties.put("jdbc-driver", props.getDriverClassName());
+        properties.put("jdbc-url", props.getUrl());
+        properties.put("jdbc-user", props.getUser());
+        properties.put("jdbc-password", props.getPassword());
+        metalake.createCatalog(catalogName, Catalog.Type.RELATIONAL, "jdbc-mysql", dataSourceInfo.getRemark(), properties);
     }
 }
