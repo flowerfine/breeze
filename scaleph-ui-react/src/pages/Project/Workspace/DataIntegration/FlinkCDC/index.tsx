@@ -108,6 +108,7 @@ const DataIntegrationFlinkCDCWeb: React.FC = () => {
                 <Button
                   shape="default"
                   type="link"
+                  danger
                   icon={<DeleteOutlined/>}
                   onClick={() => {
                     Modal.confirm({

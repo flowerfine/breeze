@@ -31,7 +31,9 @@ import java.util.List;
 
 import static cn.sliew.scaleph.plugin.seatunnel.flink.connectors.hudi.source.HudiSourceProperties.*;
 
-@AutoService(SeaTunnelConnectorPlugin.class)
+/**
+ * fixme 移除，2.3.8 文档找不到了
+ */
 public class HudiSourcePlugin extends SeaTunnelConnectorPlugin {
 
     public HudiSourcePlugin() {

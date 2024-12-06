@@ -17,7 +17,7 @@ const SaveModeItem: React.FC = () => {
         }}
         colProps={{span: 12}}
         initialValue={"CREATE_SCHEMA_WHEN_NOT_EXIST"}
-        options={["CREATE_SCHEMA_WHEN_NOT_EXIST", "ERROR_WHEN_SCHEMA_NOT_EXIST", "RECREATE_SCHEMA"]}
+        options={["CREATE_SCHEMA_WHEN_NOT_EXIST", "ERROR_WHEN_SCHEMA_NOT_EXIST", "RECREATE_SCHEMA", "IGNORE"]}
       />
 
       <ProFormSelect

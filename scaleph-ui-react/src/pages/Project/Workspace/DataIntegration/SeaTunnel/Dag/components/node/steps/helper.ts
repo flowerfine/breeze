@@ -54,6 +54,13 @@ export const StepSchemaService = {
     return values
   },
 
+  formatTableListConfig: (values: Record<string, any>, param: string, prefix: string) => {
+    if (isRecordNotEmpty(values[prefix + CommonConfigParams.commonConfig])) {
+      values[param] = JSON.stringify(values[prefix + CommonConfigParams.commonConfig])
+    }
+    return values
+  },
+
   formatPositionMapping: (values: Record<string, any>) => {
     const mappings: Record<string, any> = {}
     values.queryParamPositionArray?.forEach(function (item: Record<string, any>) {

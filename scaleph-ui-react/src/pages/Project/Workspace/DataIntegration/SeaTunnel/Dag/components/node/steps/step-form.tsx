@@ -19,6 +19,7 @@ import SinkS3FileStepForm from "./sink/sink-s3-file-step";
 import SourceJdbcStepForm from "./source/source-jdbc-step";
 import SinkJdbcStepForm from "./sink/sink-jdbc-step";
 import SourceHudiStepForm from "./source/source-hudi-step";
+import SinkHudiStepForm from "./sink/sink-hudi-step";
 import SourceIcebergStepForm from "./source/source-iceberg-step";
 import SinkIcebergStepForm from "./sink/sink-iceberg-step";
 import SourcePaimonStepForm from "./source/source-paimon-step";
@@ -139,6 +140,9 @@ const SeaTunnnelConnectorForm: React.FC<ModalFormProps<Node>> = ({visible, onVis
     } else if (type === 'source' && name === 'Hudi') {
       return (
         <SourceHudiStepForm visible data={node} onVisibleChange={onVisibleChange} onCancel={onCancel} onOK={onOK}/>);
+    } else if (type === 'sink' && name === 'Hudi') {
+      return (
+        <SinkHudiStepForm visible data={node} onVisibleChange={onVisibleChange} onCancel={onCancel} onOK={onOK}/>);
     } else if (type === 'source' && name === 'Iceberg') {
       return (
         <SourceIcebergStepForm visible data={node} onVisibleChange={onVisibleChange} onCancel={onCancel} onOK={onOK}/>);

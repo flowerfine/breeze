@@ -255,11 +255,32 @@ export const EmailParams = {
 
 export const HudiParams = {
   tablePath: 'table.path',
-  tableType: 'table.type',
+  // tableType: 'table.type',
   confFiles: 'conf.files',
   useKerberos: 'use.kerberos',
   kerberosPrincipal: 'kerberos.principal',
   kerberosPrincipalFile: 'kerberos.principal.file',
+
+  tableDfsPath: 'table_dfs_path',
+  confFilesPath: 'conf_files_path',
+  autoCommit: 'auto_commit',
+  tableList: 'table_list',
+
+  tableName: 'table_name',
+  database: 'database',
+  tableType: 'table_type',
+  opType: 'op_type',
+  recordKeyFields: 'record_key_fields',
+  partitionFields: 'partition_fields',
+  recordByteSize: 'record_byte_size',
+  batchIntervalMs: 'batch_interval_ms',
+  batchSize: 'batch_size',
+  insertShuffleParallelism: 'insert_shuffle_parallelism',
+  upsertShuffleParallelism: 'upsert_shuffle_parallelism',
+  minCommitsToKeep: 'min_commits_to_keep',
+  maxCommitsToKeep: 'max_commits_to_keep',
+  indexType: 'index_type',
+  indexClassName: 'index_class_name',
 };
 
 export const IcebergParams = {

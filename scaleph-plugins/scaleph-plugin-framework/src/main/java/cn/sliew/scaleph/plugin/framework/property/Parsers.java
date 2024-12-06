@@ -45,5 +45,9 @@ public enum Parsers {
     public static final Parser<List<String>> STRING_ARRAY_PARSER = value -> Arrays.stream(StringUtils.commaDelimitedListToStringArray(value))
             .map(String::trim).collect(Collectors.toList());
 
-    public static final Parser<JsonNode> JSON_PARSER = value -> JacksonUtil.toJsonNode(value);
+    public static final Parser<JsonNode> JSON_PARSER = value -> {
+
+        System.out.println("value: " + value);
+        return JacksonUtil.toJsonNode(value);
+    };
 }
