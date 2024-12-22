@@ -18,8 +18,8 @@
 
 package cn.sliew.scaleph.dao.entity.master.security;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.security.ResourceType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,7 +29,7 @@ import lombok.Data;
  */
 @Data
 @TableName("sec_resource_web")
-public class SecResourceWeb extends BaseDO {
+public class SecResourceWeb extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

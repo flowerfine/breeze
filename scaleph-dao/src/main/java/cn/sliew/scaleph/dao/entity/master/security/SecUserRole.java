@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.security;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sec_user_role")
-public class SecUserRole extends BaseDO {
+public class SecUserRole extends BaseAuditDO {
 
     private static final long serialVersionUID = 8752486397778737688L;
 

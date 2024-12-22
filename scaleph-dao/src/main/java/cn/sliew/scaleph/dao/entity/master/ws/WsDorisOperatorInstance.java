@@ -18,8 +18,8 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.common.YesOrNo;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -30,7 +30,7 @@ import lombok.Data;
  */
 @Data
 @TableName("ws_doris_operator_instance")
-public class WsDorisOperatorInstance extends BaseDO {
+public class WsDorisOperatorInstance extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

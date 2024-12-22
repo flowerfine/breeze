@@ -45,6 +45,8 @@ public class CarpDataSourceConfig {
 
     @Autowired
     private MybatisPlusInterceptor mybatisPlusInterceptor;
+    @Autowired
+    private CarpMybatisConfig.CarpMetaHandler carpMetaHandler;
 
     @Primary
     @Bean(DataSourceConstants.DATA_SOURCE_FACTORY)
@@ -65,7 +67,7 @@ public class CarpDataSourceConfig {
     public SqlSessionFactory carpSqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         GlobalConfig globalConfig = GlobalConfigUtils.defaults();
-        globalConfig.setMetaObjectHandler(new CarpMybatisConfig.CarpMetaHandler());
+        globalConfig.setMetaObjectHandler(carpMetaHandler);
 
         MybatisPlusProperties props = new MybatisPlusProperties();
         props.setMapperLocations(new String[]{DataSourceConstants.MAPPER_XML_PATH});

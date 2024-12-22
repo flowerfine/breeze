@@ -18,9 +18,9 @@
 
 package cn.sliew.scaleph.dao.entity.master.security;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.security.RoleStatus;
 import cn.sliew.scaleph.common.dict.security.RoleType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -38,7 +38,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "sec_role", resultMap = "SecRoleMap")
-public class SecRole extends BaseDO {
+public class SecRole extends BaseAuditDO {
 
     private static final long serialVersionUID = 2621684597930016649L;
 

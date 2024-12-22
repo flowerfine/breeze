@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.api.controller.admin;
 
-import cn.sliew.scaleph.api.annotation.AnonymousAccess;
+import cn.sliew.carp.framework.common.security.annotations.AnonymousAccess;
 import cn.sliew.scaleph.api.annotation.Logging;
 import cn.sliew.scaleph.common.constant.DictConstants;
 import cn.sliew.scaleph.common.enums.BoolEnum;

@@ -18,16 +18,16 @@
 
 package cn.sliew.scaleph.dao.entity.master.workflow;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.workflow.WorkflowExecuteType;
 import cn.sliew.scaleph.common.dict.workflow.WorkflowType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
 @TableName("workflow_definition")
-public class WorkflowDefinitionVO extends BaseDO {
+public class WorkflowDefinitionVO extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

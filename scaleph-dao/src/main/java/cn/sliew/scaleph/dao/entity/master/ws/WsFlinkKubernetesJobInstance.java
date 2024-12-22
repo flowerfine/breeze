@@ -18,10 +18,10 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.flink.FlinkJobState;
 import cn.sliew.scaleph.common.dict.flink.kubernetes.ResourceLifecycleState;
 import cn.sliew.scaleph.common.dict.flink.kubernetes.UpgradeMode;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -36,7 +36,7 @@ import java.util.Date;
  */
 @Data
 @TableName("ws_flink_kubernetes_job_instance")
-public class WsFlinkKubernetesJobInstance extends BaseDO {
+public class WsFlinkKubernetesJobInstance extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

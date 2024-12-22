@@ -16,7 +16,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
@@ -25,7 +25,7 @@ import lombok.Data;
 @Data
 @Builder
 @TableName("ws_flink_sql_gateway_catalog")
-public class WsFlinkSqlGatewayCatalog extends BaseDO {
+public class WsFlinkSqlGatewayCatalog extends BaseAuditDO {
 
     @TableField("session_handler")
     private String sessionHandler;

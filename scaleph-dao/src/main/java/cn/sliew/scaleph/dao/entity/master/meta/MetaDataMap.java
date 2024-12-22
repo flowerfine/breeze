@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.meta;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -35,7 +35,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("meta_data_map")
-public class MetaDataMap extends BaseDO {
+public class MetaDataMap extends BaseAuditDO {
 
     private static final long serialVersionUID = 1413344387211239856L;
 

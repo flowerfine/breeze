@@ -18,9 +18,9 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.flink.kubernetes.SavepointFormatType;
 import cn.sliew.scaleph.common.dict.flink.kubernetes.SavepointTriggerType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -30,7 +30,7 @@ import lombok.Data;
  */
 @Data
 @TableName("ws_flink_kubernetes_job_instance_savepoint")
-public class WsFlinkKubernetesJobInstanceSavepoint extends BaseDO {
+public class WsFlinkKubernetesJobInstanceSavepoint extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

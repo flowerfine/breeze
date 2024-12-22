@@ -18,13 +18,13 @@
 
 package cn.sliew.scaleph.application.flink.service.dto;
 
-import cn.sliew.scaleph.common.dict.flink.FlinkJobState;
-import cn.sliew.scaleph.common.dict.flink.kubernetes.ResourceLifecycleState;
-import cn.sliew.scaleph.common.dict.flink.kubernetes.UpgradeMode;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import cn.sliew.scaleph.application.flink.operator.spec.JobManagerSpec;
 import cn.sliew.scaleph.application.flink.operator.spec.TaskManagerSpec;
 import cn.sliew.scaleph.application.flink.operator.status.TaskManagerInfo;
+import cn.sliew.scaleph.common.dict.flink.FlinkJobState;
+import cn.sliew.scaleph.common.dict.flink.kubernetes.ResourceLifecycleState;
+import cn.sliew.scaleph.common.dict.flink.kubernetes.UpgradeMode;
+import cn.sliew.scaleph.system.model.BaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -38,7 +38,7 @@ import java.util.Map;
  */
 @Data
 @Schema(name = "WsFlinkKubernetesJobInstance对象", description = "flink kubernetes job instance")
-public class WsFlinkKubernetesJobInstanceDTO extends BaseDO {
+public class WsFlinkKubernetesJobInstanceDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
 

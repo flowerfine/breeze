@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.api.controller;
 
-import cn.sliew.scaleph.api.annotation.AnonymousAccess;
+import cn.sliew.carp.framework.common.security.annotations.AnonymousAccess;
 import cn.sliew.scaleph.api.annotation.Logging;
 import cn.sliew.scaleph.security.service.SecAuthenticateService;
 import cn.sliew.scaleph.security.service.dto.SecCaptchaDTO;

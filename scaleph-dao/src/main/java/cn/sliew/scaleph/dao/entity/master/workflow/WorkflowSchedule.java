@@ -18,8 +18,8 @@
 
 package cn.sliew.scaleph.dao.entity.master.workflow;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.workflow.ScheduleStatus;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -28,7 +28,7 @@ import java.util.Date;
 
 @Data
 @TableName("workflow_schedule")
-public class WorkflowSchedule extends BaseDO {
+public class WorkflowSchedule extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

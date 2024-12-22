@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.system;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +34,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_config")
-public class SysConfig extends BaseDO {
+public class SysConfig extends BaseAuditDO {
 
     private static final long serialVersionUID = -5437539010004884444L;
 

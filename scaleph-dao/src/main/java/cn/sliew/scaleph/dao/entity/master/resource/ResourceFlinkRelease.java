@@ -18,8 +18,8 @@
 
 package cn.sliew.scaleph.dao.entity.master.resource;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.flink.FlinkVersion;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("resource_flink_release")
-public class ResourceFlinkRelease extends BaseDO {
+public class ResourceFlinkRelease extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

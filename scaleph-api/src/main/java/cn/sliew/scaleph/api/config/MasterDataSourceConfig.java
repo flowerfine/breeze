@@ -18,6 +18,7 @@
 
 package cn.sliew.scaleph.api.config;
 
+import cn.sliew.carp.framework.mybatis.config.CarpMybatisConfig;
 import cn.sliew.scaleph.dao.DataSourceConstants;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
@@ -46,6 +47,8 @@ public class MasterDataSourceConfig {
 
     @Autowired
     private MybatisPlusInterceptor mybatisPlusInterceptor;
+    @Autowired
+    private CarpMybatisConfig.CarpMetaHandler carpMetaHandler;
 
     @Primary
     @Bean(DataSourceConstants.MASTER_DATA_SOURCE_FACTORY)
@@ -66,7 +69,7 @@ public class MasterDataSourceConfig {
     public SqlSessionFactory masterSqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         GlobalConfig globalConfig = GlobalConfigUtils.defaults();
-        globalConfig.setMetaObjectHandler(new MybatisConfig.MetaHandler());
+        globalConfig.setMetaObjectHandler(carpMetaHandler);
 
         MybatisPlusProperties props = new MybatisPlusProperties();
         props.setMapperLocations(new String[]{DataSourceConstants.MASTER_MAPPER_XML_PATH});

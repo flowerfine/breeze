@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.log;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,7 +36,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("log_schedule")
-public class LogSchedule extends BaseDO {
+public class LogSchedule extends BaseAuditDO {
 
     private static final long serialVersionUID = -2239522121730705579L;
 

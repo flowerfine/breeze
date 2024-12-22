@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -30,7 +30,7 @@ import lombok.Data;
  */
 @Data
 @TableName("ws_flink_sql_gateway_session")
-public class WsFlinkSqlGatewaySession extends BaseDO {
+public class WsFlinkSqlGatewaySession extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

@@ -18,10 +18,10 @@
 
 package cn.sliew.scaleph.dao.entity.master.security;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.common.Gender;
 import cn.sliew.scaleph.common.dict.security.UserStatus;
 import cn.sliew.scaleph.common.dict.security.UserType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -37,7 +37,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sec_user")
-public class SecUser extends BaseDO {
+public class SecUser extends BaseAuditDO {
 
     private static final long serialVersionUID = 2955806429097700570L;
 

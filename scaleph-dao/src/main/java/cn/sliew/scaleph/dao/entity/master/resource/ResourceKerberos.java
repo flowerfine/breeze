@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.resource;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("resource_kerberos")
-public class ResourceKerberos extends BaseDO {
+public class ResourceKerberos extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

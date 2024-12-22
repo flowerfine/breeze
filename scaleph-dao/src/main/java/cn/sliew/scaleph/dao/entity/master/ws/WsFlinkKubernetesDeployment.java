@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @TableName("ws_flink_kubernetes_deployment")
-public class WsFlinkKubernetesDeployment extends BaseDO {
+public class WsFlinkKubernetesDeployment extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

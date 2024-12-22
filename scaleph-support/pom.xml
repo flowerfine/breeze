@@ -36,7 +36,6 @@
         <module>scaleph-cache</module>
         <module>scaleph-log</module>
         <module>scaleph-system</module>
-        <module>scaleph-generator</module>
         <module>scaleph-dag</module>
         <module>scaleph-queue</module>
     </modules>

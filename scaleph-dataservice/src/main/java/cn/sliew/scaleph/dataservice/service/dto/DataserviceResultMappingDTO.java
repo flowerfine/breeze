@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dataservice.service.dto;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.scaleph.system.model.BaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -29,7 +29,7 @@ import lombok.Data;
  */
 @Data
 @Schema(name = "DataserviceResultMapping对象", description = "数据服务 返回结果映射")
-public class DataserviceResultMappingDTO extends BaseDO {
+public class DataserviceResultMappingDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
 

@@ -18,11 +18,11 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.common.YesOrNo;
 import cn.sliew.scaleph.common.dict.flink.FlinkVersion;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelEngineType;
 import cn.sliew.scaleph.common.dict.seatunnel.SeaTunnelVersion;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -34,7 +34,7 @@ import lombok.Data;
 @Data
 @TableName("ws_artifact_seatunnel")
 @Schema(name = "WsArtifactSeaTunnel", description = "artifact seatunnel")
-public class WsArtifactSeaTunnel extends BaseDO {
+public class WsArtifactSeaTunnel extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

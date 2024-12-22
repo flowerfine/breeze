@@ -18,9 +18,9 @@
 
 package cn.sliew.scaleph.dao.entity.master.ws;
 
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import cn.sliew.scaleph.common.dict.flink.FlinkCheckpointStatus;
 import cn.sliew.scaleph.common.dict.flink.FlinkCheckpointType;
-import cn.sliew.scaleph.dao.entity.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -34,7 +34,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("ws_flink_checkpoint")
-public class WsFlinkCheckpoint extends BaseDO {
+public class WsFlinkCheckpoint extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

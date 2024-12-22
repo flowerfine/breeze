@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.dataservice;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,7 +32,7 @@ import lombok.Data;
 @Data
 @TableName("dataservice_result_mapping")
 @Schema(name = "DataserviceResultMapping对象", description = "数据服务 返回结果映射")
-public class DataserviceResultMapping extends BaseDO {
+public class DataserviceResultMapping extends BaseAuditDO {
 
     private static final long serialVersionUID = 1L;
 

@@ -18,6 +18,7 @@
 
 package cn.sliew.scaleph.api.config;
 
+import cn.sliew.carp.framework.mybatis.config.CarpMybatisConfig;
 import cn.sliew.scaleph.dao.DataSourceConstants;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
@@ -45,6 +46,8 @@ public class LogDataSourceConfig {
 
     @Autowired
     private MybatisPlusInterceptor mybatisPlusInterceptor;
+    @Autowired
+    private CarpMybatisConfig.CarpMetaHandler carpMetaHandler;
 
     @Bean(DataSourceConstants.LOG_DATA_SOURCE_FACTORY)
     @ConfigurationProperties(prefix = "spring.datasource.log")
@@ -62,7 +65,7 @@ public class LogDataSourceConfig {
     public SqlSessionFactory logSqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         GlobalConfig globalConfig = GlobalConfigUtils.defaults();
-        globalConfig.setMetaObjectHandler(new MybatisConfig.MetaHandler());
+        globalConfig.setMetaObjectHandler(carpMetaHandler);
         MybatisPlusProperties props = new MybatisPlusProperties();
         props.setMapperLocations(new String[]{DataSourceConstants.LOG_MAPPER_XML_PATH});
         factoryBean.setMapperLocations(props.resolveMapperLocations());

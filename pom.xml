@@ -23,7 +23,7 @@
     <parent>
         <groupId>cn.sliew</groupId>
         <artifactId>carp-spring-boot-parent</artifactId>
-        <version>0.0.22</version>
+        <version>0.0.23</version>
     </parent>
     <groupId>cn.sliew</groupId>
     <artifactId>scaleph</artifactId>
@@ -141,7 +141,7 @@
         <config.version>1.4.3</config.version>
         <okhttp.version>4.10.0</okhttp.version>
         <minio.version>8.3.8</minio.version>
-        <carp.version>0.0.20</carp.version>
+        <carp.version>0.0.22</carp.version>
         <milky.version>1.0.13</milky.version>
         <sakura.version>1.0.2</sakura.version>
         <hadoop.version>3.3.4</hadoop.version>

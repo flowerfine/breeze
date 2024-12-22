@@ -18,7 +18,7 @@
 
 package cn.sliew.scaleph.dao.entity.master.snowflake;
 
-import cn.sliew.scaleph.dao.entity.BaseDO;
+import cn.sliew.carp.framework.mybatis.entity.BaseAuditDO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,7 +29,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("snowflake_worker_node")
-public class SnowflakeWorkerNode extends BaseDO {
+public class SnowflakeWorkerNode extends BaseAuditDO {
 
     @TableField("host_name")
     private String hostName;
