@@ -1,12 +1,12 @@
 import {PageResponse, ResponseBody} from '@/typings';
 import {request} from '@umijs/max';
-import {ScheduleGroup, ScheduleGroupAddParam, ScheduleGroupParam, ScheduleGroupUpdateParam} from './typings';
+import {WorkspaceScheduleAPI} from "@/services/workspace/schedule/typings";
 
 export const WsScheduleGroupService = {
   url: '/api/carp/schedule/group',
 
-  list: async (queryParam: ScheduleGroupParam) => {
-    return request<ResponseBody<PageResponse<ScheduleGroup>>>(`${WsScheduleGroupService.url}/page`, {
+  list: async (queryParam: WorkspaceScheduleAPI.ScheduleGroupParam) => {
+    return request<ResponseBody<PageResponse<WorkspaceScheduleAPI.ScheduleGroup>>>(`${WsScheduleGroupService.url}/page`, {
       method: 'GET',
       params: queryParam,
     }).then((res) => {
@@ -21,38 +21,38 @@ export const WsScheduleGroupService = {
   },
 
   listByType: async () => {
-    return request<ResponseBody<Array<ScheduleGroup>>>(`${WsScheduleGroupService.url}`, {
+    return request<ResponseBody<Array<WorkspaceScheduleAPI.ScheduleGroup>>>(`${WsScheduleGroupService.url}`, {
       method: 'GET'
     });
   },
 
   selectOne: async (id: number) => {
-    return request<ScheduleGroup>(`${WsScheduleGroupService.url}/${id}`, {
+    return request<WorkspaceScheduleAPI.ScheduleGroup>(`${WsScheduleGroupService.url}/${id}`, {
       method: 'GET',
     });
   },
 
-  add: async (row: ScheduleGroupAddParam) => {
+  add: async (row: WorkspaceScheduleAPI.ScheduleGroupAddParam) => {
     return request<ResponseBody<any>>(`${WsScheduleGroupService.url}`, {
       method: 'PUT',
       data: row,
     });
   },
 
-  update: async (row: ScheduleGroupUpdateParam) => {
+  update: async (row: WorkspaceScheduleAPI.ScheduleGroupUpdateParam) => {
     return request<ResponseBody<any>>(`${WsScheduleGroupService.url}`, {
       method: 'POST',
       data: row,
     });
   },
 
-  deleteOne: async (row: ScheduleGroup) => {
+  deleteOne: async (row: WorkspaceScheduleAPI.ScheduleGroup) => {
     return request<ResponseBody<boolean>>(`${WsScheduleGroupService.url}/${row.id}`, {
       method: 'DELETE'
     });
   },
 
-  deleteBatch: async (rows: ScheduleGroup[]) => {
+  deleteBatch: async (rows: WorkspaceScheduleAPI.ScheduleGroup[]) => {
     const params = rows.map((row) => row.id);
     return request<ResponseBody<boolean>>(`${WsScheduleGroupService.url}/batch`, {
       method: 'DELETE',

@@ -272,6 +272,10 @@ export default [
             path: '/workspace/schedule/job',
             component: './Project/Workspace/Schedule/Job',
           },
+          {
+            path: '/workspace/schedule/instance',
+            component: './Project/Workspace/Schedule/Instance',
+          },
         ]
       },
       {

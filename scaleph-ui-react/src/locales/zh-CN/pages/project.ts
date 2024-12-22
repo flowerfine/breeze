@@ -1240,6 +1240,17 @@ export default {
   'pages.project.schedule.job.engineType': '引擎',
   'pages.project.schedule.job.jobType': '任务类型',
   'pages.project.schedule.job.handler': '处理器',
+  'pages.project.schedule.job.instance': '任务实例',
+  'pages.project.schedule.job.instance.name': '名称',
+  'pages.project.schedule.job.instance.jobConfigId': '任务',
+  'pages.project.schedule.job.instance.timezone': '时区',
+  'pages.project.schedule.job.instance.cron': '表达式',
+  'pages.project.schedule.job.instance.validTime': '生效时间',
+  'pages.project.schedule.job.instance.startTime': '开始时间',
+  'pages.project.schedule.job.instance.endTime': '结束时间',
+  'pages.project.schedule.job.instance.params': '参数',
+  'pages.project.schedule.job.instance.timeout': '超时时间',
+  'pages.project.schedule.job.instance.status': '状态',
 
 
   'Run': '运行',

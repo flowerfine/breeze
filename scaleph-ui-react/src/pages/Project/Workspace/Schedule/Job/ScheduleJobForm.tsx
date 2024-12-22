@@ -5,11 +5,14 @@ import {ModalFormProps} from '@/typings';
 import {WORKSPACE_CONF} from '@/constants/constant';
 import {DICT_TYPE} from "@/constants/dictType";
 import {SysDictService} from "@/services/admin/system/sysDict.service";
-import {WsScheduleGroupService} from "@/services/project/WsScheduleGroupService";
-import {ScheduleJob} from '@/services/project/typings';
-import {WsScheduleJobService} from "@/services/project/WsScheduleJobService";
+import {WsScheduleGroupService} from "@/services/workspace/schedule/WsScheduleGroupService";
+import {WsScheduleJobService} from "@/services/workspace/schedule/WsScheduleJobService";
+import {WorkspaceScheduleAPI} from "@/services/workspace/schedule/typings";
 
-const ScheduleJobForm: React.FC<ModalFormProps<{ jobGroupIdData?: number, job?: ScheduleJob }>> = (props) => {
+const ScheduleJobForm: React.FC<ModalFormProps<{
+  jobGroupIdData?: number,
+  job?: WorkspaceScheduleAPI.ScheduleJob
+}>> = (props) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const projectId = localStorage.getItem(WORKSPACE_CONF.projectId);

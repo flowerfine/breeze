@@ -55,7 +55,7 @@ CREATE TABLE `carp_schedule_job_instance`
     `props`         varchar(255) COMMENT '属性',
     `params`        varchar(255) COMMENT '参数',
     `timeout`       bigint(20) COMMENT '超时时间（毫秒）',
-    `status`        varchar(4)   NOT NULL COMMENT '状态',
+    `status`        varchar(4) COMMENT '状态',
     `remark`        varchar(255) COMMENT 'remark',
     `creator`       varchar(32)           DEFAULT NULL COMMENT 'creator',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
