@@ -66,8 +66,11 @@ services:
       - scaleph
 
   gravitino:
-    image: datastrato/gravitino:0.5.1
+    image: apache/gravitino:0.7.0-incubating
     container_name: gravitino
+    depends_on:
+      mysql:
+        condition: service_healthy
     ports:
       - 8090:8090
 #    volumes:
