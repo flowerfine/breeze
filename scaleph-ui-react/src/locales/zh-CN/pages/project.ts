@@ -1236,6 +1236,11 @@ export default {
   'pages.project.schedule.job': '任务',
   'pages.project.schedule.job.name': '名称',
   'pages.project.schedule.job.jobGroupId': '分组',
+  'pages.project.schedule.job.type': '类型',
+  'pages.project.schedule.job.engineType': '引擎',
+  'pages.project.schedule.job.jobType': '任务类型',
+  'pages.project.schedule.job.handler': '处理器',
+
 
   'Run': '运行',
   'Save': '保存',

@@ -3,19 +3,17 @@ import {ProForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea} from
 import {useIntl} from '@umijs/max';
 import {ModalFormProps} from '@/typings';
 import {WORKSPACE_CONF} from '@/constants/constant';
-import {ScheduleJob} from '@/services/project/typings';
+import {DICT_TYPE} from "@/constants/dictType";
+import {SysDictService} from "@/services/admin/system/sysDict.service";
 import {WsScheduleGroupService} from "@/services/project/WsScheduleGroupService";
+import {ScheduleJob} from '@/services/project/typings';
 import {WsScheduleJobService} from "@/services/project/WsScheduleJobService";
 
-const ScheduleJobForm: React.FC<ModalFormProps<{ jobGroupIdData?: number, job?: ScheduleJob }>> = ({
-                                                                                                     data,
-                                                                                                     visible,
-                                                                                                     onVisibleChange,
-                                                                                                     onCancel
-                                                                                                   }) => {
+const ScheduleJobForm: React.FC<ModalFormProps<{ jobGroupIdData?: number, job?: ScheduleJob }>> = (props) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const projectId = localStorage.getItem(WORKSPACE_CONF.projectId);
+  const {data, visible, onVisibleChange, onCancel} = props
 
   return (
     <Modal
@@ -61,7 +59,11 @@ const ScheduleJobForm: React.FC<ModalFormProps<{ jobGroupIdData?: number, job?: 
         initialValues={{
           id: data?.job?.id,
           jobGroupId: data?.jobGroupIdData,
+          type: data?.job?.type?.value ? data?.job?.type?.value : '0',
           name: data?.job?.name,
+          engineType: data?.job?.engineType?.value,
+          jobType: data?.job?.jobType?.value,
+          handler: data?.job?.handler,
           remark: data?.job?.remark,
         }}
       >
@@ -86,10 +88,36 @@ const ScheduleJobForm: React.FC<ModalFormProps<{ jobGroupIdData?: number, job?: 
             })
           }}
         />
+        <ProFormSelect
+          name="type"
+          label={intl.formatMessage({id: 'pages.project.schedule.job.type'})}
+          rules={[{required: true}]}
+          disabled={true}
+          request={() => SysDictService.listDictByDefinition(DICT_TYPE.scheduleType)}
+        />
         <ProFormText
           name="name"
           label={intl.formatMessage({id: 'pages.project.schedule.job.name'})}
           rules={[{required: true}, {max: 32}]}
+        />
+        <ProFormSelect
+          name="engineType"
+          label={intl.formatMessage({id: 'pages.project.schedule.job.engineType'})}
+          rules={[{required: true}]}
+          disabled={data?.job?.id ? true : false}
+          request={() => SysDictService.listDictByDefinition(DICT_TYPE.scheduleEngineType)}
+        />
+        <ProFormSelect
+          name="jobType"
+          label={intl.formatMessage({id: 'pages.project.schedule.job.jobType'})}
+          rules={[{required: true}]}
+          disabled={data?.job?.id ? true : false}
+          request={() => SysDictService.listDictByDefinition(DICT_TYPE.scheduleJobType)}
+        />
+        <ProFormText
+          name="handler"
+          label={intl.formatMessage({id: 'pages.project.schedule.job.handler'})}
+          rules={[{required: true}]}
         />
         <ProFormTextArea
           name={"remark"}

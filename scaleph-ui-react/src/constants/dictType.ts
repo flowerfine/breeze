@@ -28,6 +28,10 @@ export const DICT_TYPE = {
   datasourceType: 'datasource_type',
   redisMode: 'redis_mode',
 
+  scheduleType: 'schedule_type',
+  scheduleEngineType: 'schedule_engine_type',
+  scheduleJobType: 'schedule_job_type',
+
   jobType: 'job_type',
   jobStatus: 'job_status',
   jobInstanceState: 'job_instance_state',
