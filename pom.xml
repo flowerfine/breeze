@@ -23,7 +23,7 @@
     <parent>
         <groupId>cn.sliew</groupId>
         <artifactId>carp-spring-boot-parent</artifactId>
-        <version>0.0.23</version>
+        <version>0.0.25</version>
     </parent>
     <groupId>cn.sliew</groupId>
     <artifactId>scaleph</artifactId>
@@ -129,36 +129,29 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <mapstruct.lombok.binding.version>0.2.0</mapstruct.lombok.binding.version>
         <org.projectlombok.version>1.18.24</org.projectlombok.version>
-        <velocity.engine.version>2.2</velocity.engine.version>
         <auto-service.version>1.0.1</auto-service.version>
-        <semver.version>0.9.0</semver.version>
-        <disruptor.version>4.0.0</disruptor.version>
+        <carp.version>0.0.22</carp.version>
+        <milky.version>1.0.13</milky.version>
+
         <ojdbc.version>21.1.0.0</ojdbc.version>
         <clickhouse-jdbc.version>0.3.2</clickhouse-jdbc.version>
         <doris.version>5.1.26</doris.version>
         <druid.version>0.22.1</druid.version>
         <calcite-druid.version>1.29.0</calcite-druid.version>
         <config.version>1.4.3</config.version>
-        <okhttp.version>4.10.0</okhttp.version>
-        <minio.version>8.3.8</minio.version>
-        <carp.version>0.0.22</carp.version>
-        <milky.version>1.0.13</milky.version>
+
         <sakura.version>1.0.2</sakura.version>
         <hadoop.version>3.3.4</hadoop.version>
         <hive.version>3.1.3</hive.version>
-        <protobuf.version>3.21.5</protobuf.version>
-        <netty.version>4.1.82.Final</netty.version>
         <flink.version>1.18.1</flink.version>
         <flink.base.version>1.18</flink.base.version>
         <flink-jdbc.version>3.1.2</flink-jdbc.version>
         <paimon.version>0.7.0-incubating</paimon.version>
-        <spring-cloud-openfeign.version>3.1.7</spring-cloud-openfeign.version>
-        <zjsonpatch.version>0.4.14</zjsonpatch.version>
+
+        <netty.version>4.1.82.Final</netty.version>
         <kogito.version>2.44.0.Alpha</kogito.version>
-        <cola.version>4.3.2</cola.version>
         <fury.version>0.4.1</fury.version>
-        <jgrapht.version>1.5.2</jgrapht.version>
-        <gravitino.version>0.5.1</gravitino.version>
+        <disruptor.version>4.0.0</disruptor.version>
     </properties>
 
     <dependencyManagement>
@@ -355,12 +348,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${org.projectlombok.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mapstruct.extensions.spring</groupId>
                 <artifactId>mapstruct-spring-annotations</artifactId>
                 <version>${org.mapstruct.extensions.spring.version}</version>
@@ -369,12 +356,6 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${org.mapstruct.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.zafarkhaja</groupId>
-                <artifactId>java-semver</artifactId>
-                <version>${semver.version}</version>
             </dependency>
 
             <dependency>
@@ -451,7 +432,11 @@
                 <artifactId>flink-table-planner_2.12</artifactId>
                 <version>${flink.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-kubernetes</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-connector-jdbc</artifactId>
@@ -470,26 +455,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-kubernetes</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.typesafe</groupId>
                 <artifactId>config</artifactId>
                 <version>${config.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>logging-interceptor</artifactId>
-                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
@@ -498,22 +466,11 @@
                 <version>${ojdbc.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>${protobuf.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flipkart.zjsonpatch</groupId>
-                <artifactId>zjsonpatch</artifactId>
-                <version>${zjsonpatch.version}</version>
             </dependency>
 
             <dependency>
@@ -531,51 +488,6 @@
                 <groupId>org.furyio</groupId>
                 <artifactId>fury-core</artifactId>
                 <version>${fury.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jgrapht</groupId>
-                <artifactId>jgrapht-core</artifactId>
-                <version>${jgrapht.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.datastrato.gravitino</groupId>
-                <artifactId>client-java-runtime</artifactId>
-                <version>${gravitino.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.datastrato.gravitino</groupId>
-                        <artifactId>client-java</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.datastrato.gravitino</groupId>
-                <artifactId>client-java</artifactId>
-                <version>${gravitino.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-slf4j2-impl</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-1.2-api</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
