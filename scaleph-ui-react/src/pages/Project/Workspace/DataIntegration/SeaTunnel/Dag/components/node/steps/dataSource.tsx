@@ -37,9 +37,12 @@ const DataSourceItem: React.FC<{ dataSource: string }> = ({dataSource}) => {
             dsType: params.dataSourceType
           };
           return DsInfoService.list(param).then((response) => {
-            return response.data.map((item) => {
-              return {label: item.name, value: item.id, item: item};
-            });
+            if (response.data) {
+              return response.data.map((item) => {
+                return {label: item.name, value: item.id, item: item};
+              });
+            }
+            return []
           });
         })}
       />
